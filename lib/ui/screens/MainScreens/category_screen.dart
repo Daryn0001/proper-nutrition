@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proper_nutrition_app/ui/categoties/category_builder.dart';
+import 'package:proper_nutrition_app/ui/screens/breakfast_dishes/breakfast_screen.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -9,22 +10,25 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+
+  AssetImage getImage(String path) => AssetImage(path);
+//'assets/images/завтрак.jpg'
   List<CategoryBuilder> list = [
     const CategoryBuilder(
-      color: Color(0xffda2c02),
+      backgroundImg: 'assets/images/завтрак.jpg',
       text: 'завтрак',
     ),
     const CategoryBuilder(
-      color: Color(0xff94dd16),
+      backgroundImg: 'assets/images/обед.jpg',
       text: 'Обед',
     ),
     const CategoryBuilder(
-      color: Color(0xff6880e6),
+      backgroundImg: 'assets/images/Ужин.jpg',
       text: 'Ужин',
     ),
     const CategoryBuilder(
-      color: Color(0xffdf1ca4),
-      text: 'Дополнение',
+      backgroundImg: 'assets/images/Перекус вечерний.jpg',
+      text: 'Перекус вечерний',
     ),
   ];
 
@@ -36,28 +40,20 @@ class _CategoryScreenState extends State<CategoryScreen> {
         direction: Axis.vertical,
         children: [
           Expanded(
-            flex: 2,
-            child: ListView(
+            flex: 1,
+            child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                children: const [
-                  CategoryBuilder(
-                    color: Color(0xffda2c02),
-                    text: 'завтрак',
-                  ),
-                  CategoryBuilder(
-                    color: Color(0xff94dd16),
-                    text: 'Обед',
-                  ),
-                  CategoryBuilder(
-                    color: Color(0xff6880e6),
-                    text: 'Ужин',
-                  ),
-                  CategoryBuilder(
-                    color: Color(0xffdf1ca4),
-                    text: 'Дополнение',
-                  )
-                ]),
+                itemCount: list.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: list[index],
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const BreakFastScreen()));
+                    },
+                  );
+                }),
           ),
         ],
       ),

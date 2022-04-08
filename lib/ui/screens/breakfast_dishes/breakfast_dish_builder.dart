@@ -1,17 +1,18 @@
 import 'package:flutter/cupertino.dart';
 
-class CategoryBuilder extends StatefulWidget {
+class BreakFastBuilder extends StatefulWidget {
   final dynamic backgroundImg;
   final dynamic text;
+  const BreakFastBuilder(
+      {Key? key, required this.backgroundImg, this.text}
+      ): super(key: key);
 
-  const CategoryBuilder({Key? key, required this.backgroundImg, this.text})
-      : super(key: key);
 
   @override
-  _CategoryBuilderState createState() => _CategoryBuilderState();
+  _BreakFastBuilder createState() => _BreakFastBuilder();
 }
 
-class _CategoryBuilderState extends State<CategoryBuilder> {
+class _BreakFastBuilder extends State<BreakFastBuilder>{
   DecorationImage getImage() {
     var img = const AssetImage('assets/images/1306009.jpg');
 
@@ -67,4 +68,5 @@ class _CategoryBuilderState extends State<CategoryBuilder> {
       child: Center(child: getText()),
     );
   }
+
 }

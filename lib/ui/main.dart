@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:proper_nutrition_app/ui/screens/category_screen.dart';
-import 'package:proper_nutrition_app/ui/screens/diets_screen.dart';
-import 'package:proper_nutrition_app/ui/screens/interesting_facts_screen.dart';
-import 'package:proper_nutrition_app/ui/screens/recipes_screen.dart';
+import 'package:proper_nutrition_app/ui/screens/MainScreens/category_screen.dart';
+import 'package:proper_nutrition_app/ui/screens/MainScreens/diets_screen.dart';
+import 'package:proper_nutrition_app/ui/screens/MainScreens/interesting_facts_screen.dart';
+import 'package:proper_nutrition_app/ui/screens/MainScreens/recipes_screen.dart';
 import 'package:proper_nutrition_app/ui/drawer/our_drawer.dart';
 
 void main() {
@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
       length: 4,
       child: Scaffold(
         // TODO: for Marlen with love
-        drawer: const OurDrawer(),
+        drawer: const Drawer(),
         appBar: AppBar(
           backgroundColor: const Color(0xff006f2b),
           title: const Text('Правильное питание',
