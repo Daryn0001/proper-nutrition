@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'breakfast_dish_builder.dart';
+import '../../page_builders/dish_detail_page/dish_detail_page_builder.dart';
 
 class BreakFastScreen extends StatefulWidget {
   const BreakFastScreen({Key? key}) : super(key: key);
@@ -36,6 +37,9 @@ class _BreakFast extends State<BreakFastScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: const Color(0xff006f2b),
+      ),
       body: Container(
         color: const Color(0xff000000),
         child: Flex(
@@ -51,6 +55,10 @@ class _BreakFast extends State<BreakFastScreen> {
                   return Material(
                     child: ListTile(
                         title: list[index],
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => const DishDetailPageBuilder()));
+                      },
 
                     ),
                   );

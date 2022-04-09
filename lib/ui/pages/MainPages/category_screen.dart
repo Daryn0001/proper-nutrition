@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proper_nutrition_app/ui/categoties/category_builder.dart';
-import 'package:proper_nutrition_app/ui/screens/breakfast_dishes/breakfast_screen.dart';
+import 'package:proper_nutrition_app/ui/pages/breakfast_dishes/breakfast_screen.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);

@@ -53,8 +53,8 @@ class _BreakFastBuilder extends State<BreakFastBuilder>{
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height * 0.33;
-    double width = MediaQuery.of(context).size.width * 1;
+    double height = MediaQuery.of(context).size.height * 0.285;
+    double width = MediaQuery.of(context).size.width;
     return Container(
       height: height,
       width: width,
@@ -62,8 +62,8 @@ class _BreakFastBuilder extends State<BreakFastBuilder>{
         color: const Color(0xff555555),
         image: getImage(),
       ),
-      margin: const EdgeInsets.symmetric(
-        vertical: 2.0,
+      margin: const EdgeInsets.only(
+        top: 2.0,
       ),
       child: Center(child: getText()),
     );

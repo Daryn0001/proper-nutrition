@@ -59,7 +59,10 @@ class _CategoryBuilderState extends State<CategoryBuilder> {
       width: width,
       decoration: BoxDecoration(
         color: const Color(0xff555555),
-        image: getImage(),
+        image: DecorationImage(
+          image: AssetImage(widget.backgroundImg),
+            fit: BoxFit.cover
+        ),
       ),
       margin: const EdgeInsets.symmetric(
         vertical: 2.0,

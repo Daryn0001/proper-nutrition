@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:proper_nutrition_app/ui/screens/MainScreens/category_screen.dart';
-import 'package:proper_nutrition_app/ui/screens/MainScreens/diets_screen.dart';
-import 'package:proper_nutrition_app/ui/screens/MainScreens/interesting_facts_screen.dart';
-import 'package:proper_nutrition_app/ui/screens/MainScreens/recipes_screen.dart';
-import 'package:proper_nutrition_app/ui/drawer/our_drawer.dart';
+import 'package:proper_nutrition_app/ui/pages/MainPages/category_screen.dart';
+import 'package:proper_nutrition_app/ui/pages/MainPages/diets_screen.dart';
+import 'package:proper_nutrition_app/ui/pages/MainPages/interesting_facts_screen.dart';
+import 'package:proper_nutrition_app/ui/pages/MainPages/recipes_screen.dart';
+//import 'package:proper_nutrition_app/ui/drawer/our_drawer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,12 +27,15 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatelessWidget {
   final List<Tab> tabs = <Tab>[
-    const Tab(child: RecipesScreen(), icon: Icon(Icons.dining_outlined)),
+    const Tab(child: RecipesScreen(), icon: Icon(Icons.local_dining)),
     const Tab(
         child: CategoryScreen(),
         icon: Icon(Icons.format_list_bulleted_outlined)),
-    const Tab(child: DietsScreen(), icon: Icon(Icons.filter_3)),
-    const Tab(child: FactsScreen(), icon: Icon(Icons.auto_stories_outlined)),
+    const Tab(
+      child: DietsScreen(),
+      icon: Icon(Icons.spa),
+    ),
+    const Tab(child: FactsScreen(), icon: Icon(Icons.import_contacts)),
   ];
 
   HomePage({Key? key}) : super(key: key);
@@ -45,9 +48,10 @@ class HomePage extends StatelessWidget {
         return Column(
           children: [
             Container(
+              margin: const EdgeInsets.only(top: 10),
               child: tab.icon,
             ),
-            Text(tab.text ?? 'Unknown'),
+            Text(tab.text ?? ''),
           ],
         );
       }).toList(),
@@ -83,25 +87,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-/*
-* final String label = tab.text.toLowerCase();
-            return Center(
-              child: Text(
-                'This is the $label tab',
-                style: const TextStyle(fontSize: 36),
-              ),
-            );
-            *
-            *
-            *  return Center(
-              child: PageView(
-                children: const[
-                   BlueScreen(),
-                   GreenScreen(),
-                   PinkScreen(),
-                   RedScreen(),
-                ]
-              ),
-            );
-            * */
