@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
-
+import 'package:favorite_button/favorite_button.dart';
 import 'advice_creator.dart';
 import 'cook_method_creator.dart';
 import 'ingredient_creator.dart';
@@ -19,6 +19,7 @@ class DishDetailPageBuilder extends StatefulWidget {
 
 class _DishDetail extends State<DishDetailPageBuilder> {
   //power = 161.1;
+  String dishTitle = 'Омлет с овощами';
   String dishPower = '161.1 ккал в 100 граммах';
   String briefDescription = 'Простой и быстрый завтрак';
 
@@ -39,31 +40,34 @@ class _DishDetail extends State<DishDetailPageBuilder> {
   Widget getTitle() {
     return Container(
       margin: const EdgeInsets.only(right: 10),
-      child: const Text('Омлет с овощами',
-        style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Color(0xff499274)
+      child:  Center(
+        child:  Text(dishTitle,
+          style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Color(0xff499274)
+          ),
         ),
       ),
     );
   }
 
-  final _content = 'dsad';
+ // final _content = 'dishTitle';
 
 
   // ? Share Button
   void _shareContent() {
-    Share.share(_content);
+    Share.share(dishTitle);
   }
 
   Widget getShareButton() {
     return ElevatedButton.icon(
-      icon: const Icon(Icons.share),
+      icon: const Icon(Icons.share, color: Color(0xff353535), size: 36),
       onPressed: _shareContent,
       label: const Text(''),
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.transparent),
+        padding:  MaterialStateProperty.all(EdgeInsets.zero),
+        backgroundColor: MaterialStateProperty.all(const Color(0xff1e1e1e)),
       ),
     );
   }
@@ -72,21 +76,15 @@ class _DishDetail extends State<DishDetailPageBuilder> {
   // ? Favorite  Button
   // fixme: this button has bad style and don't work yet
   Widget getFavoriteButton(){
-    return ElevatedButton.icon(
-      icon: const Icon(Icons.favorite_outlined, color: Color(0xff1e1e1e)),
-      onPressed: (){},
-      label: const Text(''),
-      style: OutlinedButton.styleFrom(
-        side: const BorderSide(width: 2, color: Colors.transparent),
-        backgroundColor: Colors.transparent,
-        primary: Theme.of(context).primaryColorDark,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(2),
-          ),
-        ),
-      ),
+    return Container(
+      margin: const EdgeInsets.only(right: 20,),
+      child: FavoriteButton(
+        valueChanged:() {},
+        iconSize: 48,
+          iconDisabledColor: const Color(0xff353535),
+        iconColor: const Color(0xff499274),
 
+      ),
     );
   }
 
@@ -100,10 +98,10 @@ class _DishDetail extends State<DishDetailPageBuilder> {
         margin: const EdgeInsets.only(
           top: 5,
           left: 55,
-
         ),
         height: MediaQuery.of(context).size.height * 0.07,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
           children:  [
             getTitle(),
             getShareButton(),

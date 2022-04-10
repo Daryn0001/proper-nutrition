@@ -6,15 +6,13 @@ class IngredientCreator extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  // double width;
-  // double height;
+
   @override
   _IngredientCreator createState() => _IngredientCreator();
 }
 
 class _IngredientCreator extends State<IngredientCreator> {
-  int addButtonColor = 0xff343633;
-  int minusButtonColor = 0xff499274;
+
 
   String title = 'Ингредиенты';
   Map<String, String> ingredients = {
@@ -33,83 +31,14 @@ class _IngredientCreator extends State<IngredientCreator> {
   }
 
 
-  List<Set<ListTile>> createIngredientTextList() {
+  List<Set<IngredientGetter>> createIngredientTextList() {
     List<String> nameOfIngredient = ingredients.keys.toList();
     List<String> quantity = ingredients.values.toList();
     var listOfIngredient = List.generate(
         nameOfIngredient.length,
         (index) => {
-              ListTile(
-                leading: null,
-                title: RichText(
-                  text: TextSpan(
-                    children: [
-                      const WidgetSpan(
-                        child:  Icon(
-                            Icons.check,
-                            color: Color(0xff303430),
-                          size: 28
-                        ),
-                      ),
-                      WidgetSpan(
-                        child: Container(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8),
-                            child: Text(
-                              nameOfIngredient[index],
-                              style: const TextStyle(
-                                decoration: TextDecoration.underline,
-                                fontSize: 16,
-                                color: Color(0xffe7cbed),
-                                fontWeight: FontWeight.w500,
-                                wordSpacing: 5,
-                              ),
-                            )),
-                      ),
-                      WidgetSpan(
-                        child: Container(
-                          padding: const EdgeInsets.only(right: 2),
-                          child: Text(
-                            quantity[index],
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Color(0xff7e8782),
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // Icon(Icons.add_rounded, color: Color(0xff343633), size: 18,)
-                trailing: GestureDetector(
-                  onTap: (){
-                    setState(() {
-                      if(addButtonColor == 0xff343633){
-                        addButtonColor = 0xff499274;
-                      }
-                      else {
-                        addButtonColor = 0xff343633;
-                      }
-                    });
-                  },
-                  child: Container(
-                    height: 30.0,
-                    width: 30.0,
-                    child:  Center(
-                      child:  Icon(
-                        Icons.add_rounded,
-                        color: Color(addButtonColor),
-                        size: 24,
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24.0),
-                        border: Border.all(color:  Color(addButtonColor), width: 3,)),
-                  ),
-                ),
-              ),
+          IngredientGetter(nameOfIngredient: nameOfIngredient[index],
+              quantity: quantity[index])
             });
     return listOfIngredient;
   }
@@ -176,17 +105,116 @@ class _IngredientCreator extends State<IngredientCreator> {
 }
 
 
-/*
-* ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: ingredients.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                      ),
-                      child: list[index].elementAt(0),
-                    );
-                  })
-* */
+
+class IngredientGetter extends StatefulWidget {
+  final dynamic nameOfIngredient;
+  final dynamic quantity;
+  const IngredientGetter(
+      {
+        Key? key,
+        required this.nameOfIngredient,
+        required this.quantity
+      }
+  ) : super(key: key);
+
+  @override
+  _IngredientGetter createState() => _IngredientGetter();
+}
+
+class _IngredientGetter extends State<IngredientGetter>{
+  int defaultBtnColor = 0xff343633;
+  int addButtonColor = 0xff343633;
+  int minusButtonColor = 0xff499274;
+  Widget get() {
+
+    return ListTile(
+      leading: null,
+      title: RichText(
+        text: TextSpan(
+          children: [
+            const WidgetSpan(
+              child:  Icon(
+                  Icons.check,
+                  color: Color(0xff303430),
+                  size: 28
+              ),
+            ),
+            WidgetSpan(
+              child: Container(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    widget.nameOfIngredient,
+                    style: const TextStyle(
+                      decoration: TextDecoration.underline,
+                      fontSize: 16,
+                      color: Color(0xffe7cbed),
+                      fontWeight: FontWeight.w500,
+                      wordSpacing: 5,
+                    ),
+                  )),
+            ),
+            WidgetSpan(
+              child: Container(
+                padding: const EdgeInsets.only(right: 2),
+                child: Text(
+                  widget.quantity,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Color(0xff7e8782),
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      // Icon(Icons.add_rounded, color: Color(0xff343633), size: 18,)
+      trailing: getAddButton(),
+    );
+  }
+  var defaultBtnIcon = Icons.add_rounded;
+  var addIcon = Icons.add_rounded;
+  var minusIcon = Icons.remove;
+
+  Widget getAddButton(){
+    return GestureDetector(
+      onTap: (){
+        setState(() {
+          if(defaultBtnColor == addButtonColor){
+            defaultBtnColor = minusButtonColor;
+            defaultBtnIcon = minusIcon;
+          }
+          else {
+            defaultBtnColor = addButtonColor;
+            defaultBtnIcon = addIcon;
+          }
+        });
+      },
+      child: Container(
+        height: 30.0,
+        width: 30.0,
+        child:  Center(
+          child:  Icon(
+            defaultBtnIcon,
+            color: Color(defaultBtnColor),
+            size: 24,
+          ),
+        ),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24.0),
+            border: Border.all(color:  Color(defaultBtnColor), width: 3,)),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: get()
+    );
+  }
+
+}
+

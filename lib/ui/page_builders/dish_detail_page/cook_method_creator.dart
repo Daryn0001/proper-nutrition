@@ -30,8 +30,8 @@ class _CookMethodCreator extends State<CookMethodCreator> {
                   children: [
                     TextSpan(
                       text: counter,
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: TextStyle(
+                          color: Color(textColor),
                           fontWeight: FontWeight.w700,
                         )
                     ),
@@ -63,7 +63,7 @@ class _CookMethodCreator extends State<CookMethodCreator> {
       ),
       child: Text(title,
           style: const TextStyle(
-            fontSize: 18,
+            fontSize: 20,
             fontWeight: FontWeight.w700,
             color: Colors.white,
           )),
