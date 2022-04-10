@@ -1,20 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:proper_nutrition_app/ui/pages/MainPages/category_screen.dart';
-import 'package:proper_nutrition_app/ui/pages/MainPages/diets_screen.dart';
-import 'package:proper_nutrition_app/ui/pages/MainPages/interesting_facts_screen.dart';
-import 'package:proper_nutrition_app/ui/pages/MainPages/recipes_screen.dart';
-//import 'package:proper_nutrition_app/ui/drawer/our_drawer.dart';
+import 'package:proper_nutrition_app/ui/pages/main_pages/category_page/category_feed_builder.dart';
+import 'package:proper_nutrition_app/ui/pages/main_pages/category_page/category_screen.dart';
+import 'package:proper_nutrition_app/ui/pages/main_pages/diets_page/diets_screen.dart';
+import 'package:proper_nutrition_app/ui/pages/main_pages/facts_page/interesting_facts_screen.dart';
+import 'package:proper_nutrition_app/ui/pages/main_pages/recipes_page/recipes_screen.dart';
+
+import 'dishes/example_data.dart';
+
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+   MyApp({Key? key}) : super(key: key);
+  JsonExample js = JsonExample();
   @override
   Widget build(BuildContext context) {
+    js.decode();
     return MaterialApp(
       theme: ThemeData(
         tabBarTheme: const TabBarTheme(),
@@ -25,12 +29,32 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
+List<dynamic> exampleList =const [
+   CategoryFeedBuilder(
+    categoryFeedBackgroundImg: 'assets/images/завтрак.jpg',
+    categoryTitle: 'завтрак',
+  ),
+  CategoryFeedBuilder(
+    categoryFeedBackgroundImg: 'assets/images/обед.jpg',
+    categoryTitle: 'Обед',
+  ),
+  CategoryFeedBuilder(
+    categoryFeedBackgroundImg: 'assets/images/Ужин.jpg',
+    categoryTitle: 'Ужин',
+  ),
+  CategoryFeedBuilder(
+    categoryFeedBackgroundImg: 'assets/images/Перекус вечерний.jpg',
+    categoryTitle: 'Перекус вечерний',
+  ),
+];
+
 class HomePage extends StatelessWidget {
   final List<Tab> tabs = <Tab>[
     const Tab(child: RecipesScreen(), icon: Icon(Icons.local_dining)),
-    const Tab(
-        child: CategoryScreen(),
-        icon: Icon(Icons.format_list_bulleted_outlined)),
+     Tab(
+        child: CategoryScreen(listOfFeeds: exampleList),
+         icon: const Icon(Icons.format_list_bulleted_outlined)),
     const Tab(
       child: DietsScreen(),
       icon: Icon(Icons.spa),

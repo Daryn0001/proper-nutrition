@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:proper_nutrition_app/ui/builders/dish_detail_page/dish_detail_page_builder.dart';
 
-class BreakFastBuilder extends StatefulWidget {
+class FeedBuilder extends StatefulWidget {
   final dynamic backgroundImg;
   final dynamic text;
-  const BreakFastBuilder(
-      {Key? key, required this.backgroundImg, this.text}
+  final dynamic routePage;
+   const FeedBuilder(
+      {Key? key, required this.backgroundImg, required this.text, this.routePage}
       ): super(key: key);
 
 
@@ -12,7 +15,18 @@ class BreakFastBuilder extends StatefulWidget {
   _BreakFastBuilder createState() => _BreakFastBuilder();
 }
 
-class _BreakFastBuilder extends State<BreakFastBuilder>{
+class _BreakFastBuilder extends State<FeedBuilder>{
+  dynamic obj = const DishDetailPageBuilder(
+      diets: [],
+      numberOfCalories: 0,
+      ingredients: {'': ''},
+      briefDescription: '',
+      cookMethod: [],
+      imgPath: '',
+      title: '',
+      adviceText: '');
+
+
   DecorationImage getImage() {
     var img = const AssetImage('assets/images/1306009.jpg');
 
@@ -53,19 +67,26 @@ class _BreakFastBuilder extends State<BreakFastBuilder>{
 
   @override
   Widget build(BuildContext context) {
+    obj = widget.routePage ?? obj;
     double height = MediaQuery.of(context).size.height * 0.285;
     double width = MediaQuery.of(context).size.width;
-    return Container(
-      height: height,
-      width: width,
-      decoration: BoxDecoration(
-        color: const Color(0xff555555),
-        image: getImage(),
+    return GestureDetector(
+      child: Container(
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          color: const Color(0xff555555),
+          image: getImage(),
+        ),
+        margin: const EdgeInsets.only(
+          top: 2.0,
+        ),
+        child: Center(child: getText()),
       ),
-      margin: const EdgeInsets.only(
-        top: 2.0,
-      ),
-      child: Center(child: getText()),
+      onTap: () {Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => obj));}
     );
   }
 

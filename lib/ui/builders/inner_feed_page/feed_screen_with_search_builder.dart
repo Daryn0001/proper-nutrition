@@ -1,106 +1,100 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'breakfast_dish_builder.dart';
-//import '../../page_builders/dish_detail_page/dish_detail_page_builder.dart';
+import '../feed_builder.dart';
 import 'search_widget.dart';
 
-class BreakFastScreen extends StatefulWidget {
-  const BreakFastScreen({Key? key}) : super(key: key);
+class FeedPageBuilderWithSearch extends StatefulWidget {
+  //final List<FeedBuilder> listOfFeeds;
+  final dynamic listOfFeeds;
+
+  const FeedPageBuilderWithSearch({Key? key, required this.listOfFeeds}) : super(key: key);
 
 
   @override
-  _BreakFast createState() => _BreakFast();
+  _FeedPageBuilderWithSearchState createState() => _FeedPageBuilderWithSearchState();
 }
 
-class _BreakFast extends State<BreakFastScreen> {
+class _FeedPageBuilderWithSearchState extends State<FeedPageBuilderWithSearch> {
+  String query = '';
+  late List<FeedBuilder> feeds;
 
-  List<BreakFastBuilder> list = [
-    const BreakFastBuilder(
+  List<FeedBuilder> exampleList = [
+    const FeedBuilder(
       backgroundImg: 'assets/images/Блюдо из яиц.jpg',
       text: 'Блюдо из яиц',
     ),
-    const BreakFastBuilder(
+    const FeedBuilder(
       backgroundImg: 'assets/images/Первые блюда.jpg',
       text: 'Первые блюда',
     ),
-    const BreakFastBuilder(
+    const FeedBuilder(
       backgroundImg: 'assets/images/Салаты.jpg',
       text: 'Салаты',
     ),
-    const BreakFastBuilder(
+    const FeedBuilder(
       backgroundImg: 'assets/images/Мясные блюда.jpg',
       text: 'Мясные блюда',
     ),
   ];
 
-
   @override
   void initState() {
     super.initState();
-    dishes = list;
+    feeds = exampleList;
+    /* if(widget.listOfFeeds.isEmpty) {
+    } else {
+      feeds = widget.listOfFeeds;
+    }*/
   }
 
-  String query = '';
-  late List<BreakFastBuilder> dishes;
-
   Widget buildSearch() => SearchWidget(
-    text: '',
-    hintText: 'Поиск',
-    onChanged: searchObject,
-  );
+        text: '',
+        hintText: 'Поиск',
+        onChanged: searchObject,
+      );
 
-  void searchObject(String query){
-    final dishes = list.where((dish) {
+  void searchObject(String query) {
+    final feeds = exampleList.where((dish) {
       final titleLower = dish.text.toLowerCase();
       final searchLower = query.toLowerCase();
 
       return titleLower.contains(searchLower);
-    } ).toList();
+    }).toList();
 
     setState(() {
       this.query = query;
-      this.dishes = dishes;
+      this.feeds = feeds;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: const Color(0xff006f2b),
+        backgroundColor: const Color(0xff006f2b),
       ),
       body: Container(
         color: const Color(0xff1e1e1e),
-        child: Flex(
-          direction: Axis.vertical,
-          children: [
-            buildSearch(),
-            Expanded (
+        child: Flex(direction: Axis.vertical, children: [
+          buildSearch(),
+          Expanded(
               flex: 2,
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: dishes.length,
-                itemBuilder:(context, index) {
+                itemCount: feeds.length,
+                itemBuilder: (context, index) {
                   return Material(
                     child: ListTile(
-                        title: dishes[index],
+                      title: feeds[index],
                       onTap: () {
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (context) => DishDetailPageBuilder()));
                       },
-
                     ),
                   );
                 },
-              )
-            ),
-          ]
-        ),
+              )),
+        ]),
       ),
     );
   }
-
 }

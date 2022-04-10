@@ -1,37 +1,49 @@
-import 'package:flutter/material.dart';
-import 'package:proper_nutrition_app/ui/categoties/category_builder.dart';
-import 'package:proper_nutrition_app/ui/pages/breakfast_dishes/breakfast_screen.dart';
 
-class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({Key? key}) : super(key: key);
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import '../feed_builder.dart';
+
+class FeedPageBuilder extends StatefulWidget {
+  final List<dynamic> listOfFeeds;
+
+  const FeedPageBuilder({Key? key, required this.listOfFeeds}) : super(key: key);
 
   @override
-  _CategoryScreenState createState() => _CategoryScreenState();
+  _FeedPageBuilderState createState() => _FeedPageBuilderState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> {
+class _FeedPageBuilderState extends State<FeedPageBuilder> {
 
   AssetImage getImage(String path) => AssetImage(path);
-//'assets/images/завтрак.jpg'
-  List<CategoryBuilder> list = [
-    const CategoryBuilder(
+
+
+  List<dynamic> exampleList = [
+    const FeedBuilder(
       backgroundImg: 'assets/images/завтрак.jpg',
       text: 'завтрак',
     ),
-    const CategoryBuilder(
+    const FeedBuilder(
       backgroundImg: 'assets/images/обед.jpg',
       text: 'Обед',
     ),
-    const CategoryBuilder(
+    const FeedBuilder(
       backgroundImg: 'assets/images/Ужин.jpg',
       text: 'Ужин',
     ),
-    const CategoryBuilder(
+    const FeedBuilder(
       backgroundImg: 'assets/images/Перекус вечерний.jpg',
       text: 'Перекус вечерний',
     ),
   ];
 
+  @override
+  void initState() {
+    super.initState();
+    if(widget.listOfFeeds.isNotEmpty && widget.listOfFeeds.length > 1)
+      {
+        exampleList = widget.listOfFeeds;
+      }
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,14 +56,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
             child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: list.length,
+                itemCount: exampleList.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: list[index],
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const BreakFastScreen()));
-                    },
+                    title: exampleList[index],
+                    onTap: () {},
                   );
                 }),
           ),

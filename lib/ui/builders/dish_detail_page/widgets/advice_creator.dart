@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
 class Advice extends StatefulWidget{
-  //var text = '';
-  const Advice({Key? key}) : super(key: key);
+  final String text;
+  const Advice({Key? key, required this.text}) : super(key: key);
 
 
   @override
@@ -10,7 +10,7 @@ class Advice extends StatefulWidget{
 }
 
 class _Advice extends State<Advice>{
-  String text = 'Можно добавить любимые  овощи на авш вкус.';
+  String text = 'Что то непонятное тут твориться согласись!.';
   int textColor = 0xff999d9c;
 
   @override

@@ -12,7 +12,6 @@ class CookMethodCreator extends StatefulWidget {
 class _CookMethodCreator extends State<CookMethodCreator> {
   int textColor = 0xff999d9c;
   String title = 'Способ приготовления';
-  //var cookingSteps = ['step sssssssssssssssss 1', 'step 2', 'step 3'];
 
   Widget getCookingStepText(index) {
     String counter = '${index + 1})',

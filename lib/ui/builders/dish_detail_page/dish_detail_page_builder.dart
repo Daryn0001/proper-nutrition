@@ -2,37 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:favorite_button/favorite_button.dart';
-import 'advice_creator.dart';
-import 'cook_method_creator.dart';
-import 'ingredient_creator.dart';
-import 'recommended_diets_creator.dart';
-
-class DishDetailPageBuilder extends StatefulWidget {
-   dynamic imgPath;
-   dynamic title;
-   dynamic numberOfCalories;
-   dynamic briefDescription;
-   Map<String, String> ingredients;
-   List<int> diets;
-   List<String> cookMethod;
-
-  //var power;
-  // var briefDescription;
-
-   DishDetailPageBuilder(
-      {Key? key,
-      this.imgPath,
-      this.title,
-      required this.numberOfCalories,
-      required this.briefDescription,
-      required this.ingredients,
-      required this.diets,
-      required this.cookMethod})
-      : super(key: key);
-
-  @override
-  _DishDetailPageBuilder createState() => _DishDetailPageBuilder();
-}
+import 'widgets/advice_creator.dart';
+import 'widgets/cook_method_creator.dart';
+import 'widgets/ingredient_creator.dart';
+import 'widgets/recommended_diets_creator.dart';
 
 class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
   String dishTitle = 'unknown dish title';
@@ -41,6 +14,7 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
   String briefDescription = 'unknown dish description';
   var cookingSteps = ['step 1', 'step 2', 'step 3', 'step 4', 'step 5'];
   var diets = [0, 0, 0, 0, 0];
+  String adviceText = 'something about interesting';
 
   Map<String, String> ingredients = {
     'unknown1': ' unknown г.',
@@ -48,8 +22,8 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
     'unknown3': ' unknown г.',
     'unknown4': ' unknown г.',
     'unknown5': ' unknown г. ',
-  };
 
+  };
 
 // ? Get Image
   Widget getImage() {
@@ -194,32 +168,42 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
   }
 
   // ? ingredients getter
+  // width: MediaQuery.of(context).size.width,
+  // height: MediaQuery.of(context).size.height * 0.55,
   Widget getIngredients(ingredients) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.55,
-      child: Container(
-        color: const Color(0xff1d2822),
-        child: IngredientCreator(ingredients: ingredients,),
+    return Container(
+      color: const Color(0xff1d2822),
+      child: IngredientCreator(
+        ingredients: ingredients,
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-      dishTitle = widget.title != '' ? widget.title : dishTitle;
+    dishTitle = widget.title.isNotEmpty ? widget.title : dishTitle;
 
-      path = widget.imgPath != '' ? widget.imgPath : path;
+    path = widget.imgPath.isNotEmpty ? widget.imgPath : path;
 
-      dishPower =  widget.numberOfCalories != 0 ?  '${widget.numberOfCalories} ккал в 100 граммах' : dishPower;
+    dishPower = widget.numberOfCalories != 0
+        ? '${widget.numberOfCalories} ккал в 100 граммах'
+        : dishPower;
 
-      briefDescription = widget.briefDescription != '' ? widget.briefDescription : briefDescription;
+    briefDescription = widget.briefDescription.isNotEmpty
+        ? widget.briefDescription
+        : briefDescription;
 
-      ingredients = widget.ingredients.isNotEmpty  ? widget.ingredients : ingredients;
+    ingredients = widget.ingredients.isNotEmpty &&
+            widget.ingredients.keys.first.length > 1
+        ? widget.ingredients
+        : ingredients;
 
-      diets = widget.diets.isNotEmpty ? widget.diets : diets;
+    diets = widget.diets.isNotEmpty ? widget.diets : diets;
 
-      cookingSteps = widget.cookMethod.isNotEmpty ? widget.cookMethod : cookingSteps;
+    cookingSteps =
+        widget.cookMethod.isNotEmpty ? widget.cookMethod : cookingSteps;
+
+    adviceText = widget.adviceText.isNotEmpty ? widget.adviceText : adviceText;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color(0xff006f2b),
@@ -237,11 +221,40 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
                   getIngredients(ingredients),
                   DietsCreator(diets: diets),
                   CookMethodCreator(cookingSteps: cookingSteps),
-                  const Advice(),
+                  Advice(text: adviceText),
                 ]),
               ],
             ),
           ),
         ));
   }
+}
+
+class DishDetailPageBuilder extends StatefulWidget {
+  final String imgPath;
+  final String title;
+  final double numberOfCalories;
+  final String briefDescription;
+  final String adviceText;
+  final Map<String, String> ingredients;
+  final List<int> diets;
+  final List<String> cookMethod;
+
+  //var power;
+  // var briefDescription;
+
+  const DishDetailPageBuilder(
+      {Key? key,
+      required this.imgPath,
+      required this.title,
+      required this.numberOfCalories,
+      required this.briefDescription,
+      required this.ingredients,
+      required this.diets,
+      required this.adviceText,
+      required this.cookMethod})
+      : super(key: key);
+
+  @override
+  _DishDetailPageBuilder createState() => _DishDetailPageBuilder();
 }
