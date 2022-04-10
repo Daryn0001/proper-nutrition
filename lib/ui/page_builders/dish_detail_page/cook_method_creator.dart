@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CookMethodCreator extends StatefulWidget {
-  const CookMethodCreator({Key? key}) : super(key: key);
+  List<String> cookingSteps;
+  CookMethodCreator({Key? key, required this.cookingSteps}) : super(key: key);
 
   @override
   _CookMethodCreator createState() => _CookMethodCreator();
@@ -11,11 +12,11 @@ class CookMethodCreator extends StatefulWidget {
 class _CookMethodCreator extends State<CookMethodCreator> {
   int textColor = 0xff999d9c;
   String title = 'Способ приготовления';
-  var cookingSteps = ['step sssssssssssssssss 1', 'step 2', 'step 3'];
+  //var cookingSteps = ['step sssssssssssssssss 1', 'step 2', 'step 3'];
 
   Widget getCookingStepText(index) {
     String counter = '${index + 1})',
-    text = ' ${cookingSteps[index]}';
+    text = ' ${widget.cookingSteps[index]}';
     return Column(
       children: [
         Align(
@@ -82,7 +83,7 @@ class _CookMethodCreator extends State<CookMethodCreator> {
           Align(alignment: Alignment.centerLeft, child: getTitle()),
           Column(
               children: List.generate(
-                  cookingSteps.length,
+                  widget.cookingSteps.length,
                   (index) => Align(
                         alignment: Alignment.centerLeft,
                         child: (getCookingStepText(index)),

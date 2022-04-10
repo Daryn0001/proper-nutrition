@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DietsCreator extends StatefulWidget {
-  const DietsCreator({Key? key}) : super(key: key);
+  dynamic diets;
+  DietsCreator({Key? key, required this.diets}) : super(key: key);
 
 
   @override
@@ -11,7 +12,6 @@ class DietsCreator extends StatefulWidget {
 }
 
 class _DietsCreator extends State<DietsCreator>{
-  var diets = [1, 3, 5, 6, 7];
 
 
   String dietsTitle = 'Это блюдо рекомендовано при следующих диетах ';
@@ -19,7 +19,7 @@ class _DietsCreator extends State<DietsCreator>{
 
   // ? diet getter
   Widget getDiets() {
-    List<Set<GestureDetector>> list = createDietButtons();
+    int list = createDietButtons(widget.diets).length;
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: 40,
@@ -32,7 +32,7 @@ class _DietsCreator extends State<DietsCreator>{
           Wrap(
             direction: Axis.horizontal,
             alignment: WrapAlignment.center,
-            children: List.generate(list.length, (index) => (
+            children: List.generate(list, (index) => (
                 getDietsButton(index)
             )
             ),)
@@ -44,7 +44,7 @@ class _DietsCreator extends State<DietsCreator>{
   }
 
   Widget getDietsButton(index) {
-    var listOfBtn = createDietButtons();
+    var listOfBtn = createDietButtons(widget.diets);
     return Container(
       margin: const EdgeInsets.symmetric(
           vertical: 10),
@@ -53,7 +53,7 @@ class _DietsCreator extends State<DietsCreator>{
   }
 
 
-  List<Set<GestureDetector>> createDietButtons(){
+  List<Set<GestureDetector>> createDietButtons(diets){
 
     var list = List.generate(diets.length, (index) => {
       GestureDetector(

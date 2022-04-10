@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class IngredientCreator extends StatefulWidget {
-  const IngredientCreator({
+  Map<String, String> ingredients;
+  IngredientCreator({
     Key? key,
+    required this.ingredients
   }) : super(key: key);
 
 
@@ -74,6 +76,7 @@ class _IngredientCreator extends State<IngredientCreator> {
 
   @override
   Widget build(BuildContext context) {
+    ingredients = widget.ingredients.isNotEmpty ? widget.ingredients : ingredients;
     var list = createIngredientTextList();
     return Container(
       margin: const EdgeInsets.symmetric(
