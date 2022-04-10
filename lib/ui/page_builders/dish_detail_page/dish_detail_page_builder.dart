@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 
+import 'advice_creator.dart';
+import 'cook_method_creator.dart';
 import 'ingredient_creator.dart';
+import 'recommended_diets_creator.dart';
 
 class DishDetailPageBuilder extends StatefulWidget {
   //var power;
@@ -18,8 +21,8 @@ class _DishDetail extends State<DishDetailPageBuilder> {
   //power = 161.1;
   String dishPower = '161.1 ккал в 100 граммах';
   String briefDescription = 'Простой и быстрый завтрак';
-  String diets = 'Это блюдо рекомендовано при следующих диетах ';
 
+  var diets = [1, 3, 5, 6, 7];
 
 // ? Get Image
   Widget getImage() {
@@ -185,30 +188,6 @@ class _DishDetail extends State<DishDetailPageBuilder> {
     );
   }
 
-// ? diets text getter
-  Widget getDietsText() {
-    return Container(
-      margin: const EdgeInsets.symmetric(
-        vertical: 40,
-        horizontal: 20,
-
-      ),
-      child: Center(
-        child: Text(
-            diets,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 17,
-            fontWeight: FontWeight.w500
-
-          ),
-        ),
-      ),
-    );
-  }
-
-
   @override
   Widget build(BuildContext context) {
 
@@ -231,7 +210,9 @@ class _DishDetail extends State<DishDetailPageBuilder> {
                     dishPowerInfo(),
                     getBriefDescription(),
                     getIngredients(),
-                    getDietsText(),
+                    const DietsCreator(),
+                    const CookMethodCreator(),
+                    const Advice(),
                   ]
                 ),
 
