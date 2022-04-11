@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   JsonExample js = JsonExample();
   @override
   Widget build(BuildContext context) {
-    js.decode();
+    //js.decode();
     return MaterialApp(
       theme: ThemeData(
         tabBarTheme: const TabBarTheme(),
