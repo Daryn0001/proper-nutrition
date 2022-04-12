@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:proper_nutrition_app/ui/builders/dish_detail_page/dish_detail_page_builder.dart';
 
@@ -27,17 +26,16 @@ class _BreakFastBuilder extends State<FeedBuilder>{
       adviceText: '');
 
 
-  DecorationImage getImage() {
-    var img = const AssetImage('assets/images/1306009.jpg');
+  Widget getImage() {
+    var img = Image.network('https://healthyeating.printslon.com/images/R1.png',
+        fit: BoxFit.cover, width: double.infinity);
 
     if (widget.backgroundImg != null) {
-      img = AssetImage(widget.backgroundImg);
-    }
 
-    return DecorationImage(
-      image: img,
-      fit: BoxFit.cover,
-    );
+      img = Image.network(widget.backgroundImg,  fit: BoxFit.cover, width: double.infinity,
+          );
+    }
+    return img;
   }
 
   Container getText() {
@@ -68,20 +66,18 @@ class _BreakFastBuilder extends State<FeedBuilder>{
   @override
   Widget build(BuildContext context) {
     obj = widget.routePage ?? obj;
-    double height = MediaQuery.of(context).size.height * 0.285;
-    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height * 0.29;
     return GestureDetector(
       child: Container(
         height: height,
-        width: width,
-        decoration: BoxDecoration(
-          color: const Color(0xff555555),
-          image: getImage(),
-        ),
+        width: double.infinity,
         margin: const EdgeInsets.only(
           top: 2.0,
         ),
-        child: Center(child: getText()),
+        child: Stack(children: [
+          getImage(),
+          Center(child: getText()),
+        ]),
       ),
       onTap: () {Navigator.push(
           context,

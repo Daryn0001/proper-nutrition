@@ -9,16 +9,16 @@ class Dish {
   final bool favorite;
   final String title;
 
-  @JsonKey(name:'category_id')
+  @JsonKey(name: 'category_id')
   final int categoryID;
 
-  @JsonKey(name:'diet_id')
+  @JsonKey(name: 'diet_id')
   final int dietID;
 
-  @JsonKey(name:'image_id')
-  final int imageID;
+  @JsonKey(name: 'image_id')
+  final String imagePath;
 
-  @JsonKey(name:'excerpt')
+  @JsonKey(name: 'excerpt')
   final String description;
 
   @JsonKey(name: "power")
@@ -27,7 +27,7 @@ class Dish {
   final List<Ingredient> ingredients;
   final String advice;
 
-  @JsonKey(name:'cooking_method')
+  @JsonKey(name: 'cooking_method')
   final List<String> cookingMethod;
 
   Dish(
@@ -35,26 +35,50 @@ class Dish {
       this.title,
       this.categoryID,
       this.dietID,
-      this.imageID,
+      this.imagePath,
       this.description,
       this.numberOfCalories,
       this.ingredients,
-      this.advice, this.cookingMethod
-      );
+      this.advice,
+      this.cookingMethod);
 
+  Map<String, String> getIngredients() {
+    Map<String, String> map = {};
+    for (Ingredient instance in ingredients) {
+      String name = instance.name;
+      String quantity = instance.quantity.toString();
+      switch (instance.type) {
+        case 1:
+          quantity = '$quantity шт.';
+          break;
+        case 2:
+          quantity =  quantity + ' г.';
+          break;
+        case 3:
+          quantity = quantity + ' мл';
+          break;
+        case 4:
+          quantity = 'по вкусу';
+          break;
+      }
+      map.addAll({name: quantity});
+    }
 
-  factory Dish.fromJson(Map<String,dynamic> json) => _$DishFromJson(json);
+    return map;
+  }
 
-  Map<String,dynamic> toJson() => _$DishToJson(this);
+  factory Dish.fromJson(Map<String, dynamic> json) => _$DishFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DishToJson(this);
 
   @override
-  String toString(){
+  String toString() {
     return '{'
         '\n favorite: $favorite'
         '\n title: $title'
         '\n categoryID: $categoryID'
         '\n dietID: $dietID'
-        '\n imageID: $imageID'
+        '\n imageID: $imagePath'
         '\n description: $description'
         '\n numberOfCalories: $numberOfCalories'
         '\n ingredients: $ingredients'
@@ -62,7 +86,6 @@ class Dish {
         '\n cookingMethod: $cookingMethod'
         '\n}';
   }
-
 }
 
 /*

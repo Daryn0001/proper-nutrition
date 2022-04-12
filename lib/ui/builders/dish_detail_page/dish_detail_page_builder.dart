@@ -7,9 +7,35 @@ import 'widgets/cook_method_creator.dart';
 import 'widgets/ingredient_creator.dart';
 import 'widgets/recommended_diets_creator.dart';
 
+class DishDetailPageBuilder extends StatefulWidget {
+  final String imgPath;
+  final String title;
+  final double numberOfCalories;
+  final String briefDescription;
+  final String adviceText;
+  final Map<String, String> ingredients;
+  final List<int> diets;
+  final List<String> cookMethod;
+
+  const DishDetailPageBuilder(
+      {Key? key,
+      required this.imgPath,
+      required this.title,
+      required this.numberOfCalories,
+      required this.briefDescription,
+      required this.ingredients,
+      required this.diets,
+      required this.adviceText,
+      required this.cookMethod})
+      : super(key: key);
+
+  @override
+  _DishDetailPageBuilder createState() => _DishDetailPageBuilder();
+}
+
 class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
   String dishTitle = 'unknown dish title';
-  String path = 'assets/images/Блины, оладьи.jpg';
+  String path = 'https://healthyeating.printslon.com/images/zavtrak_145.png';
   String dishPower = '1 million ккал в 100 граммах';
   String briefDescription = 'unknown dish description';
   var cookingSteps = ['step 1', 'step 2', 'step 3', 'step 4', 'step 5'];
@@ -22,17 +48,17 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
     'unknown3': ' unknown г.',
     'unknown4': ' unknown г.',
     'unknown5': ' unknown г. ',
-
   };
-
+//https://healthyeating.printslon.com/images/zavtrak_145.png
 // ? Get Image
   Widget getImage() {
+    path = widget.imgPath != '' ? widget.imgPath : path;
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.35,
-      child: Image.asset(
+      child: Image.network(
         path,
         width: MediaQuery.of(context).size.width,
-        fit: BoxFit.fill,
+        fit: BoxFit.cover,
       ),
     );
   }
@@ -228,33 +254,4 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
           ),
         ));
   }
-}
-
-class DishDetailPageBuilder extends StatefulWidget {
-  final String imgPath;
-  final String title;
-  final double numberOfCalories;
-  final String briefDescription;
-  final String adviceText;
-  final Map<String, String> ingredients;
-  final List<int> diets;
-  final List<String> cookMethod;
-
-  //var power;
-  // var briefDescription;
-
-  const DishDetailPageBuilder(
-      {Key? key,
-      required this.imgPath,
-      required this.title,
-      required this.numberOfCalories,
-      required this.briefDescription,
-      required this.ingredients,
-      required this.diets,
-      required this.adviceText,
-      required this.cookMethod})
-      : super(key: key);
-
-  @override
-  _DishDetailPageBuilder createState() => _DishDetailPageBuilder();
 }

@@ -48,64 +48,56 @@ class _RecipesScreenState extends State<RecipesScreen> {
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.329,
-              child: Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Container(
-                      width: double.infinity,
-                      color: Colors.grey,
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.308,
-                            child: Stack(children: [
-                              CarouselSlider.builder(
-                                  options: CarouselOptions(
-                                    height: MediaQuery.of(context).size.height,
-                                    autoPlay: true,
-                                    autoPlayInterval:
-                                        const Duration(seconds: 3),
-                                    viewportFraction: 1,
-                                    onPageChanged: (index, reason) => setState(
-                                        () => activeIndex4TopSlider = index),
-                                  ),
-                                  itemCount: imageUrls4TopSlider.length,
-                                  itemBuilder: (context, index, realIndex) {
-                                    final imgUrl = imageUrls4TopSlider[index];
-                                    return buildImage(imgUrl, index, 'Смотреть все рецепты',
-                                        (MediaQuery.of(context).size.width * 0.7),
-                                        (MediaQuery.of(context).size.width * 0.2), 20.0);
-                                  }),
-                              Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Container(
-                                      margin: const EdgeInsets.only(bottom: 10),
-                                      child: buildIndicator(
-                                          activeIndex4TopSlider)))
-                            ]),
-                          ),
-                        ],
-                      )),
-                ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Container(
+                    width: double.infinity,
+                    color: Colors.grey,
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.308,
+                      child: Stack(children: [
+                        CarouselSlider.builder(
+                            options: CarouselOptions(
+                              height: MediaQuery.of(context).size.height,
+                              autoPlay: false,
+                              autoPlayInterval:
+                                  const Duration(seconds: 3),
+                              viewportFraction: 1,
+                              onPageChanged: (index, reason) => setState(
+                                  () => activeIndex4TopSlider = index),
+                            ),
+                            itemCount: imageUrls4TopSlider.length,
+                            itemBuilder: (context, index, realIndex) {
+                              final imgUrl = imageUrls4TopSlider[index];
+                              return buildImage(imgUrl, index, 'Смотреть все рецепты',
+                                  (MediaQuery.of(context).size.width * 0.7),
+                                  (MediaQuery.of(context).size.width * 0.2), 20.0);
+                            }),
+                        Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                                margin: const EdgeInsets.only(bottom: 10),
+                                child: buildIndicator(
+                                    activeIndex4TopSlider)))
+                      ]),
+                    )),
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.5,
-              child: Container(
-                child: GridView.builder(
-                    itemCount: gridWidgets.length,
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 5,
-                      crossAxisSpacing: 5,
-                    ),
-                    itemBuilder: (context, index) {
-                      return gridWidgets[index];
-                    }),
-              ),
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: GridView.builder(
+                  itemCount: gridWidgets.length,
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  gridDelegate:
+                      const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 5,
+                    crossAxisSpacing: 5,
+                  ),
+                  itemBuilder: (context, index) {
+                    return gridWidgets[index];
+                  }),
             ),
           ],
         ),
@@ -144,11 +136,12 @@ class _RecipesScreenState extends State<RecipesScreen> {
         ),
       );
 
-  Widget slideBuilder(imgUrls, title) => Stack(children: [
+  Widget slideBuilder(imgUrls, title) => Stack(
+      children: [
     CarouselSlider.builder(
         options: CarouselOptions(
           height: MediaQuery.of(context).size.height,
-          autoPlay: true,
+          autoPlay: false,
           autoPlayInterval: const Duration(seconds: 3),
           viewportFraction: 1,
           onPageChanged: (index, reason) =>
@@ -168,14 +161,20 @@ class _RecipesScreenState extends State<RecipesScreen> {
                 buildIndicator(activeIndex4NewsSlider, count: imgUrls.length)))
   ]);
 
-
   Widget getTitle(title, width, height, fontSize) {
     return Align(
       alignment: Alignment.center,
       child: Container(
         width: width,
         height: height,
-        color: const Color(0xff006f2b),
+        decoration: BoxDecoration(
+          color: const Color(0xff358c6a),
+            border: Border.all(
+              color: const Color(0xff000000),
+              width: 1,
+              style: BorderStyle.solid,
+            ),
+        ),
         child:  Padding(
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal:10),
           child: Center(
@@ -195,33 +194,5 @@ class _RecipesScreenState extends State<RecipesScreen> {
   }
 
 
-  Widget widgetBuilder (imgUrl) {
-    return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 1,
-      ),
-      child: Image.network(
-        imgUrl,
-        width:double.infinity,
-        height: MediaQuery.of(context).size.height,
-        fit: BoxFit.cover,
-      ),
-    );
-  }
-
 }
 
-/*[
-                    Container(
-                      color: Colors.black12,
-                    ),
-                    Container(
-                      color: Colors.black12,
-                    ),
-                    Container(
-                      color: Colors.black12,
-                    ),
-                    Container(
-                      color: Colors.black12,
-                    ),
-                  ]*/

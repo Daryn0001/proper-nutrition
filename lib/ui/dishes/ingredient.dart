@@ -15,6 +15,9 @@ class Ingredient {
 
   Map<String,dynamic> toJson() => _$IngredientToJson(this);
 
+
+
+
   @override
   String toString(){
     return '\n{\n'

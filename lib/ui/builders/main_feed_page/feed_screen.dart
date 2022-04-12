@@ -13,25 +13,24 @@ class FeedPageBuilder extends StatefulWidget {
 }
 
 class _FeedPageBuilderState extends State<FeedPageBuilder> {
-
-  AssetImage getImage(String path) => AssetImage(path);
+  static String obet = 'https://sun9-87.userapi.com/impf/_dJLh_5kQsRV1Wqh3TDFmbdCEB_mISY0n1_Krw/gQDmF1pL-s8.jpg?size=700x462&quality=95&sign=568b72de5e1951eae6e57cce47918560&type=album';
+  //AssetImage getImage(String path) => AssetImage(path);
 
 
   List<dynamic> exampleList = [
-    const FeedBuilder(
-      backgroundImg: 'assets/images/завтрак.jpg',
+     FeedBuilder(
+      backgroundImg: obet,
       text: 'завтрак',
     ),
-    const FeedBuilder(
-      backgroundImg: 'assets/images/обед.jpg',
-      text: 'Обед',
+    FeedBuilder(
+      backgroundImg: obet,text: 'Обед',
     ),
-    const FeedBuilder(
-      backgroundImg: 'assets/images/Ужин.jpg',
+     FeedBuilder(
+      backgroundImg: obet,
       text: 'Ужин',
     ),
-    const FeedBuilder(
-      backgroundImg: 'assets/images/Перекус вечерний.jpg',
+     FeedBuilder(
+      backgroundImg: obet,
       text: 'Перекус вечерний',
     ),
   ];
@@ -58,9 +57,9 @@ class _FeedPageBuilderState extends State<FeedPageBuilder> {
                 shrinkWrap: true,
                 itemCount: exampleList.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: exampleList[index],
-                    onTap: () {},
+                  return Container(
+                    margin: const EdgeInsets.symmetric(vertical: 3),
+                    child: exampleList[index],
                   );
                 }),
           ),

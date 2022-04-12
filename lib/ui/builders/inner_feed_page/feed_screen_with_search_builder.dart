@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import '../feed_builder.dart';
 import 'search_widget.dart';
 
 class FeedPageBuilderWithSearch extends StatefulWidget {
   //final List<FeedBuilder> listOfFeeds;
-  final dynamic listOfFeeds;
+  final List<dynamic> listOfFeeds;
 
   const FeedPageBuilderWithSearch({Key? key, required this.listOfFeeds}) : super(key: key);
 
@@ -15,24 +15,28 @@ class FeedPageBuilderWithSearch extends StatefulWidget {
 }
 
 class _FeedPageBuilderWithSearchState extends State<FeedPageBuilderWithSearch> {
-  String query = '';
-  late List<FeedBuilder> feeds;
+  static String obet = 'https://sun9-87.userapi.com/impf/_dJLh_5kQsRV1Wqh3TDFmbdCEB_mISY0n1_Krw/gQDmF1pL-s8.jpg?size=700x462&quality=95&sign=568b72de5e1951eae6e57cce47918560&type=album';
 
-  List<FeedBuilder> exampleList = [
-    const FeedBuilder(
-      backgroundImg: 'assets/images/Блюдо из яиц.jpg',
+  String query = '';
+  late List<dynamic> feeds;
+
+
+
+  List<dynamic> exampleList = [
+     FeedBuilder(
+      backgroundImg: obet,
       text: 'Блюдо из яиц',
     ),
-    const FeedBuilder(
-      backgroundImg: 'assets/images/Первые блюда.jpg',
+     FeedBuilder(
+      backgroundImg: obet,
       text: 'Первые блюда',
     ),
-    const FeedBuilder(
-      backgroundImg: 'assets/images/Салаты.jpg',
+     FeedBuilder(
+      backgroundImg: obet,
       text: 'Салаты',
     ),
-    const FeedBuilder(
-      backgroundImg: 'assets/images/Мясные блюда.jpg',
+     FeedBuilder(
+      backgroundImg: obet,
       text: 'Мясные блюда',
     ),
   ];
@@ -40,11 +44,14 @@ class _FeedPageBuilderWithSearchState extends State<FeedPageBuilderWithSearch> {
   @override
   void initState() {
     super.initState();
-    feeds = exampleList;
-    /* if(widget.listOfFeeds.isEmpty) {
+
+     if(widget.listOfFeeds.isNotEmpty && (widget.listOfFeeds.first is Widget)) {
+       feeds = widget.listOfFeeds;
+       exampleList = feeds;
+
     } else {
-      feeds = widget.listOfFeeds;
-    }*/
+       feeds = exampleList;
+    }
   }
 
   Widget buildSearch() => SearchWidget(
@@ -78,19 +85,17 @@ class _FeedPageBuilderWithSearchState extends State<FeedPageBuilderWithSearch> {
         child: Flex(direction: Axis.vertical, children: [
           buildSearch(),
           Expanded(
-              flex: 2,
+              flex: 1,
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: feeds.length,
                 itemBuilder: (context, index) {
-                  return Material(
-                    child: ListTile(
-                      title: feeds[index],
-                      onTap: () {
-                      },
-                    ),
+                  return Container(
+                    margin: const EdgeInsets.symmetric(vertical: 3),
+                    child: feeds[index],
                   );
+
                 },
               )),
         ]),

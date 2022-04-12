@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:proper_nutrition_app/ui/pages/main_pages/category_page/category_feed_builder.dart';
 import 'package:proper_nutrition_app/ui/pages/main_pages/category_page/category_screen.dart';
@@ -9,7 +9,8 @@ import 'package:proper_nutrition_app/ui/pages/main_pages/recipes_page/recipes_sc
 import 'dishes/example_data.dart';
 
 
-void main() {
+  main() {
+
   runApp( MyApp());
 }
 
@@ -50,10 +51,11 @@ List<dynamic> exampleList =const [
 ];
 
 class HomePage extends StatelessWidget {
+  //BreakfastHelper h = BreakfastHelper();
   final List<Tab> tabs = <Tab>[
     const Tab(child: RecipesScreen(), icon: Icon(Icons.local_dining)),
      Tab(
-        child: CategoryScreen(listOfFeeds: exampleList),
+        child: CategoryScreen(),
          icon: const Icon(Icons.format_list_bulleted_outlined)),
     const Tab(
       child: DietsScreen(),

@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Завтрак",
+    "img_url": "https://sun9-87.userapi.com/impf/_dJLh_5kQsRV1Wqh3TDFmbdCEB_mISY0n1_Krw/gQDmF1pL-s8.jpg?size=700x462&quality=95&sign=568b72de5e1951eae6e57cce47918560&type=album",
+    "type": 0
+  },
+  {
+    "title": "Перекус утренный",
+    "img_url": "https://sun9-87.userapi.com/impf/_dJLh_5kQsRV1Wqh3TDFmbdCEB_mISY0n1_Krw/gQDmF1pL-s8.jpg?size=700x462&quality=95&sign=568b72de5e1951eae6e57cce47918560&type=album",
+    "type": 1
+  },
+  {
+    "title": "Обед",
+    "img_url": "https://sun9-17.userapi.com/impf/22GWmBy-RgsLt1eMRl8yHC0RKClRWztSouR2eA/MRQBWQKiD1E.jpg?size=700x467&quality=95&sign=f9fb0731a1e4b03d351b67c058510a4b&type=album",
+    "type": 2
+  },
+  {
+    "title": "Перекус вечерный",
+    "img_url": "https://sun9-72.userapi.com/impf/e_TTf5poSl5APIDJe71vOnGl-w0DniHjv0LGlQ/kkFVtj3ervY.jpg?size=700x467&quality=95&sign=8a7b03949ae1b538c1ce5a28cffd4f5c&type=album",
+    "type": 3
+  },
+  {
+    "title": "Ужин",
+    "img_url": "https://sun9-70.userapi.com/impf/QBYbhVVA8fVKyDQrsL7GyM4kH7jtzl4maTCrKA/dM9MEcjxf04.jpg?size=700x700&quality=95&sign=38d5363fd7d238d53865996ebc8e0797&type=album",
+    "type": 4
+  }
+]
