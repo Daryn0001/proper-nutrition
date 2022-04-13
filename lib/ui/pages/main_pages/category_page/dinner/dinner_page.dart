@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../builders/inner_feed_page/feed_screen_with_search_builder.dart';
+import '../../../../modules/feed_constructor.dart';
 
 class Dinner extends StatefulWidget {
   const Dinner({Key? key}) : super(key: key);
@@ -10,10 +9,11 @@ class Dinner extends StatefulWidget {
 }
 
 class _DinnerState extends State<Dinner> {
+  final typeOfCategory = 4;
   @override
   Widget build(BuildContext context) {
-    return FeedPageBuilderWithSearch(
-      listOfFeeds: [],
+    return FeedConstructor(
+      type: typeOfCategory,
     );
   }
 }

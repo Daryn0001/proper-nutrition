@@ -6,7 +6,7 @@ import 'package:proper_nutrition_app/ui/pages/main_pages/diets_page/diets_screen
 import 'package:proper_nutrition_app/ui/pages/main_pages/facts_page/interesting_facts_screen.dart';
 import 'package:proper_nutrition_app/ui/pages/main_pages/recipes_page/recipes_screen.dart';
 
-import 'dishes/example_data.dart';
+import 'dish/example_data.dart';
 import 'drawer/our_drawer.dart';
 
 
