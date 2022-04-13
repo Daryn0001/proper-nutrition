@@ -1,6 +1,4 @@
 
-import 'dart:convert';
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'category.g.dart';
@@ -8,6 +6,7 @@ part 'category.g.dart';
 @JsonSerializable()
 class Category {
   final String title;
+  @JsonKey(name: 'img_url')
   final String imgUrl;
   final int type;
 

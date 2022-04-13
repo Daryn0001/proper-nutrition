@@ -22,7 +22,7 @@ class _DietsCreator extends State<DietsCreator>{
     int list = createDietButtons(widget.diets).length;
     return Container(
       margin: const EdgeInsets.symmetric(
-        vertical: 40,
+        vertical: 30,
         horizontal: 20,
 
       ),
@@ -46,8 +46,6 @@ class _DietsCreator extends State<DietsCreator>{
   Widget getDietsButton(index) {
     var listOfBtn = createDietButtons(widget.diets);
     return Container(
-      margin: const EdgeInsets.symmetric(
-          vertical: 10),
       child: listOfBtn[index].elementAt(0),
     );
   }
@@ -80,15 +78,20 @@ class _DietsCreator extends State<DietsCreator>{
 
   // ? diets text getter
   Widget getDietsText() {
-    return Center(
-      child: Text(
-        dietsTitle,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-            color: Colors.white,
-            fontSize: 17,
-            fontWeight: FontWeight.w500
+    return Container(
+      margin: const EdgeInsets.only(
+        bottom: 15,
+      ),
+      child: Center(
+        child: Text(
+          dietsTitle,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.w500
 
+          ),
         ),
       ),
     );

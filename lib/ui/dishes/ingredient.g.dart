@@ -9,7 +9,7 @@ part of 'ingredient.dart';
 Ingredient _$IngredientFromJson(Map<String, dynamic> json) => Ingredient(
       json['name'] as String,
       json['type'] as int,
-      json['quantity'] as int,
+      (json['quantity'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$IngredientToJson(Ingredient instance) =>

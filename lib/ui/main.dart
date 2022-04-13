@@ -7,6 +7,7 @@ import 'package:proper_nutrition_app/ui/pages/main_pages/facts_page/interesting_
 import 'package:proper_nutrition_app/ui/pages/main_pages/recipes_page/recipes_screen.dart';
 
 import 'dishes/example_data.dart';
+import 'drawer/our_drawer.dart';
 
 
   main() {
@@ -54,9 +55,9 @@ class HomePage extends StatelessWidget {
   //BreakfastHelper h = BreakfastHelper();
   final List<Tab> tabs = <Tab>[
     const Tab(child: RecipesScreen(), icon: Icon(Icons.local_dining)),
-     Tab(
+    const Tab(
         child: CategoryScreen(),
-         icon: const Icon(Icons.format_list_bulleted_outlined)),
+         icon:  Icon(Icons.format_list_bulleted_outlined)),
     const Tab(
       child: DietsScreen(),
       icon: Icon(Icons.spa),
@@ -87,7 +88,7 @@ class HomePage extends StatelessWidget {
       length: 4,
       child: Scaffold(
         // TODO: for Marlen with love
-        drawer: const Drawer(),
+        drawer: const OurDrawer(),
         appBar: AppBar(
           backgroundColor: const Color(0xff006f2b),
           title: const Text('Правильное питание',

@@ -13,7 +13,7 @@ class FeedPageBuilder extends StatefulWidget {
 }
 
 class _FeedPageBuilderState extends State<FeedPageBuilder> {
-  static String obet = 'https://sun9-87.userapi.com/impf/_dJLh_5kQsRV1Wqh3TDFmbdCEB_mISY0n1_Krw/gQDmF1pL-s8.jpg?size=700x462&quality=95&sign=568b72de5e1951eae6e57cce47918560&type=album';
+  static String obet = 'https://wallpaperaccess.com/full/3759075.jpg';
   //AssetImage getImage(String path) => AssetImage(path);
 
 

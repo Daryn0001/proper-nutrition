@@ -29,30 +29,42 @@ class _BreakFast extends State<BreakFast> {
   List<dynamic> feedBuild() {
     feeds = [];
     //print('BEGINNING - ${dishes.length} \n*******************************');
-    feeds = List.generate(
-        dishes.length,
-        (index) => (FeedBuilder(
-              backgroundImg: 'https://${dishes[index].imagePath}',
-              text: dishes[index].title,
-              routePage: DishDetailPageBuilder(
-                title: dishes[index].title,
-                numberOfCalories: dishes[index].numberOfCalories * 1.0,
-                diets: [dishes[index].dietID],
-                adviceText: dishes[index].advice,
-                imgPath: 'https://${dishes[index].imagePath}',
-                cookMethod: dishes[index].cookingMethod,
-                ingredients: dishes[index].getIngredients(),
-                briefDescription: dishes[index].description,
-              ),
-            )));
 
+    for(Dish dish in dishes){
+      String imgPath = '';
+      if(dish.imagePath.startsWith('https://')){
+        imgPath = dish.imagePath;
+      }
+      else{
+        imgPath = 'https://${dish.imagePath}';
+        print('imgPath: $imgPath');
+      }
+
+      feeds.add(
+          FeedBuilder(
+            backgroundImg: imgPath,
+            text: dish.title,
+            routePage: DishDetailPageBuilder(
+              title: dish.title,
+              numberOfCalories: dish.numberOfCalories * 1.0,
+              diets: dish.dietID,
+              adviceText: dish.advice,
+              imgPath: imgPath,
+              cookMethod: dish.cookingMethod,
+              ingredients: dish.getIngredients(),
+              briefDescription: dish.description,
+            ),
+          )
+      );
+
+    }
     return feeds;
   }
 
   Future<void> decode() async {
     //print('method - decode()');
     final String response =
-        await rootBundle.loadString('assets/json/receipts2.json');
+        await rootBundle.loadString('assets/json/breakfast.json');
     setState(() {
       final json = jsonDecode(response) as List<dynamic>;
       final dishList = json

@@ -9,9 +9,8 @@ part of 'dish.dart';
 Dish _$DishFromJson(Map<String, dynamic> json) => Dish(
       json['favorite'] as bool,
       json['title'] as String,
-      json['category_id'] as int,
-      json['diet_id'] as int,
-      json['image_path'] as String,
+      (json['diet_id'] as List<dynamic>).map((e) => e as int).toList(),
+      json['image_url'] as String,
       json['excerpt'] as String,
       json['power'] as int,
       (json['ingredients'] as List<dynamic>)
@@ -26,9 +25,8 @@ Dish _$DishFromJson(Map<String, dynamic> json) => Dish(
 Map<String, dynamic> _$DishToJson(Dish instance) => <String, dynamic>{
       'favorite': instance.favorite,
       'title': instance.title,
-      'category_id': instance.categoryID,
       'diet_id': instance.dietID,
-      'image_path': instance.imagePath,
+      'image_url': instance.imagePath,
       'excerpt': instance.description,
       'power': instance.numberOfCalories,
       'ingredients': instance.ingredients,

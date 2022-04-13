@@ -9,13 +9,11 @@ class Dish {
   final bool favorite;
   final String title;
 
-  @JsonKey(name: 'category_id')
-  final int categoryID;
 
   @JsonKey(name: 'diet_id')
-  final int dietID;
+  final List<int> dietID;
 
-  @JsonKey(name: 'image_id')
+  @JsonKey(name: 'image_url')
   final String imagePath;
 
   @JsonKey(name: 'excerpt')
@@ -33,7 +31,6 @@ class Dish {
   Dish(
       this.favorite,
       this.title,
-      this.categoryID,
       this.dietID,
       this.imagePath,
       this.description,
@@ -76,7 +73,6 @@ class Dish {
     return '{'
         '\n favorite: $favorite'
         '\n title: $title'
-        '\n categoryID: $categoryID'
         '\n dietID: $dietID'
         '\n imageID: $imagePath'
         '\n description: $description'

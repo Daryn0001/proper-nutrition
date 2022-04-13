@@ -179,7 +179,7 @@ class _IngredientGetter extends State<IngredientGetter>{
   }
   var defaultBtnIcon = Icons.add_rounded;
   var addIcon = Icons.add_rounded;
-  var minusIcon = Icons.remove;
+  var removeIcon = Icons.remove;
 
   Widget getAddButton(){
     return GestureDetector(
@@ -187,7 +187,7 @@ class _IngredientGetter extends State<IngredientGetter>{
         setState(() {
           if(defaultBtnColor == addButtonColor){
             defaultBtnColor = minusButtonColor;
-            defaultBtnIcon = minusIcon;
+            defaultBtnIcon = removeIcon;
           }
           else {
             defaultBtnColor = addButtonColor;

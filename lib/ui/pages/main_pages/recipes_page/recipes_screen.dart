@@ -59,7 +59,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
                         CarouselSlider.builder(
                             options: CarouselOptions(
                               height: MediaQuery.of(context).size.height,
-                              autoPlay: false,
+                              autoPlay: true,
                               autoPlayInterval:
                                   const Duration(seconds: 3),
                               viewportFraction: 1,

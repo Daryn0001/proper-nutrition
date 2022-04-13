@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:favorite_button/favorite_button.dart';
@@ -35,7 +34,8 @@ class DishDetailPageBuilder extends StatefulWidget {
 
 class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
   String dishTitle = 'unknown dish title';
-  String path = 'https://healthyeating.printslon.com/images/zavtrak_145.png';
+  String imgPath = 'https://qazyqarta.kz/wp-content/uploads/2020/10/syrnyi-sup-s-kuricei-i-kartofelem_1590478472_10_max-1.jpg';
+  //'https://p4.wallpaperbetter.com/wallpaper/641/365/125/portrait-anime-anime-girls-digital-art-artwork-hd-wallpaper-preview.jpg';
   String dishPower = '1 million ккал в 100 граммах';
   String briefDescription = 'unknown dish description';
   var cookingSteps = ['step 1', 'step 2', 'step 3', 'step 4', 'step 5'];
@@ -49,14 +49,15 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
     'unknown4': ' unknown г.',
     'unknown5': ' unknown г. ',
   };
+
 //https://healthyeating.printslon.com/images/zavtrak_145.png
 // ? Get Image
   Widget getImage() {
-    path = widget.imgPath != '' ? widget.imgPath : path;
+    imgPath = widget.imgPath != '' ? widget.imgPath : imgPath;
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.35,
       child: Image.network(
-        path,
+        imgPath,
         width: MediaQuery.of(context).size.width,
         fit: BoxFit.cover,
       ),
@@ -65,17 +66,11 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
 
   // ? Get Title
   Widget getTitle() {
-    return Container(
-      margin: const EdgeInsets.only(right: 10),
-      child: Center(
-        child: Text(
-          dishTitle,
-          style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Color(0xff499274)),
-        ),
-      ),
+    return Text(
+      dishTitle,
+      textAlign: TextAlign.center,
+      style: const TextStyle(
+          fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff499274)),
     );
   }
 
@@ -99,11 +94,11 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
   }
 
   // ? Favorite  Button
-  // fixme: this button has bad style and don't work yet
+  // fixme: don't work yet
   Widget getFavoriteButton() {
     return Container(
       margin: const EdgeInsets.only(
-        right: 20,
+        right: 2,
       ),
       child: FavoriteButton(
         valueChanged: () {},
@@ -116,19 +111,27 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
 
 // ? Dish title and 2 buttons
   Widget getTitleAndShareBtn() {
-// ! title color:  499274
-    return Align(
-      alignment: Alignment.centerRight,
-      widthFactor: 1,
+    return Center(
       child: Container(
         margin: const EdgeInsets.only(
           top: 5,
-          left: 55,
         ),
-        height: MediaQuery.of(context).size.height * 0.07,
+        // height: MediaQuery.of(context).size.height * 0.07,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [getTitle(), getShareButton(), getFavoriteButton()],
+          children: [
+            Flexible(
+              flex: 3,
+              child: Container(),
+            ),
+            Flexible(flex: 7, child: Center(child: getTitle())),
+            Flexible(
+                flex: 2,
+                child: Container(
+                  margin: const EdgeInsets.only(right: 8.0),
+                  child: getShareButton(),
+                )),
+            Flexible(flex: 2, child: Align(child: getFavoriteButton()))
+          ],
         ),
       ),
     );
@@ -209,7 +212,7 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
   Widget build(BuildContext context) {
     dishTitle = widget.title.isNotEmpty ? widget.title : dishTitle;
 
-    path = widget.imgPath.isNotEmpty ? widget.imgPath : path;
+    imgPath = widget.imgPath.isNotEmpty ? widget.imgPath : imgPath;
 
     dishPower = widget.numberOfCalories != 0
         ? '${widget.numberOfCalories} ккал в 100 граммах'
@@ -237,20 +240,16 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
         body: SingleChildScrollView(
           child: Container(
             color: const Color(0xff1e1e1e),
-            child: Stack(
-              children: <Widget>[
-                Column(children: [
-                  getImage(),
-                  getTitleAndShareBtn(),
-                  dishPowerInfo(),
-                  getBriefDescription(),
-                  getIngredients(ingredients),
-                  DietsCreator(diets: diets),
-                  CookMethodCreator(cookingSteps: cookingSteps),
-                  Advice(text: adviceText),
-                ]),
-              ],
-            ),
+            child: Column(children: [
+              getImage(),
+              getTitleAndShareBtn(),
+              dishPowerInfo(),
+              getBriefDescription(),
+              getIngredients(ingredients),
+              DietsCreator(diets: diets),
+              CookMethodCreator(cookingSteps: cookingSteps),
+              Advice(text: adviceText),
+            ]),
           ),
         ));
   }

@@ -6,7 +6,7 @@ part 'ingredient.g.dart';
 class Ingredient {
   final String name;
   final int type;
-  final int quantity;
+  final double quantity;
 
   Ingredient(this.name, this.type, this.quantity);
 

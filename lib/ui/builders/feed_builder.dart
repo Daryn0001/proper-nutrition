@@ -27,7 +27,7 @@ class _BreakFastBuilder extends State<FeedBuilder>{
 
 
   Widget getImage() {
-    var img = Image.network('https://healthyeating.printslon.com/images/R1.png',
+    var img = Image.network('https://wallpaperaccess.com/full/3759075.jpg',
         fit: BoxFit.cover, width: double.infinity);
 
     if (widget.backgroundImg != null) {
@@ -41,8 +41,8 @@ class _BreakFastBuilder extends State<FeedBuilder>{
   Container getText() {
     return Container(
       width: MediaQuery.of(context).size.width * 0.65,
-      height: MediaQuery.of(context).size.width * 0.14,
-      padding: const EdgeInsets.all(10),
+      height: MediaQuery.of(context).size.width * 0.16,
+      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: const Color(0xff358c6a),
           border: Border.all(
@@ -51,12 +51,16 @@ class _BreakFastBuilder extends State<FeedBuilder>{
             style: BorderStyle.solid,
           )),
       child: Center(
-        child: Text(
-          widget.text,
-          style: const TextStyle(
-            fontSize: 24,
-            color: Color(0xffffffff),
-            fontWeight: FontWeight.w600,
+        child: FittedBox(
+          fit: BoxFit.fitWidth,
+          child: Text(
+            widget.text,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 24,
+              color: Color(0xffffffff),
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ),
