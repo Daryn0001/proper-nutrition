@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:proper_nutrition_app/ui/builders/inner_feed_page/feed_screen_with_search_builder.dart';
 import 'package:proper_nutrition_app/ui/builders/feed_builder.dart';
 
 

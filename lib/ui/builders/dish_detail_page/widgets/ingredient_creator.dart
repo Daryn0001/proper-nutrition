@@ -1,10 +1,13 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class IngredientCreator extends StatefulWidget {
+  final String foodName;
   Map<String, String> ingredients;
   IngredientCreator({
     Key? key,
+    required this.foodName,
     required this.ingredients
   }) : super(key: key);
 
@@ -39,7 +42,9 @@ class _IngredientCreator extends State<IngredientCreator> {
     var listOfIngredient = List.generate(
         nameOfIngredient.length,
         (index) => {
-          IngredientGetter(nameOfIngredient: nameOfIngredient[index],
+          IngredientGetter(
+            foodName: widget.foodName,
+              nameOfIngredient: nameOfIngredient[index],
               quantity: quantity[index])
             });
     return listOfIngredient;
@@ -110,11 +115,13 @@ class _IngredientCreator extends State<IngredientCreator> {
 
 
 class IngredientGetter extends StatefulWidget {
+  final String foodName;
   final dynamic nameOfIngredient;
   final dynamic quantity;
   const IngredientGetter(
       {
         Key? key,
+        required this.foodName,
         required this.nameOfIngredient,
         required this.quantity
       }
@@ -125,9 +132,31 @@ class IngredientGetter extends StatefulWidget {
 }
 
 class _IngredientGetter extends State<IngredientGetter>{
+  late final DocumentReference ref;
   int defaultBtnColor = 0xff343633;
   int addButtonColor = 0xff343633;
   int minusButtonColor = 0xff499274;
+
+  initFirebase() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+  }
+
+
+  @override
+  initState(){
+    super.initState();
+    initFirebase();
+
+    ref = FirebaseFirestore
+        .instance
+        .collection('feed')
+        .doc(widget.foodName);
+
+
+
+  }
+
   Widget get() {
 
     return ListTile(
@@ -181,6 +210,8 @@ class _IngredientGetter extends State<IngredientGetter>{
   var addIcon = Icons.add_rounded;
   var removeIcon = Icons.remove;
 
+var id = '';
+
   Widget getAddButton(){
     return GestureDetector(
       onTap: (){
@@ -188,10 +219,33 @@ class _IngredientGetter extends State<IngredientGetter>{
           if(defaultBtnColor == addButtonColor){
             defaultBtnColor = minusButtonColor;
             defaultBtnIcon = removeIcon;
+
+
+            FirebaseFirestore
+                .instance
+                .collection('ingredients')
+                .add({
+              'name' : widget.nameOfIngredient,
+              'quantity' : widget.quantity
+            }).then((value) => (
+                setState(() {
+                  id = value.id;
+                })
+            ));
+
+
           }
           else {
             defaultBtnColor = addButtonColor;
             defaultBtnIcon = addIcon;
+
+            if(id.isNotEmpty){
+              FirebaseFirestore.instance
+                  .collection('ingredients')
+                  .doc(id)
+                  .delete();
+            }
+
           }
         });
       },

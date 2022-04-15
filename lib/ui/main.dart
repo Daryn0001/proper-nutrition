@@ -1,26 +1,29 @@
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:proper_nutrition_app/ui/pages/main_pages/category_page/category_feed_builder.dart';
 import 'package:proper_nutrition_app/ui/pages/main_pages/category_page/category_screen.dart';
 import 'package:proper_nutrition_app/ui/pages/main_pages/diets_page/diets_screen.dart';
-import 'package:proper_nutrition_app/ui/pages/main_pages/facts_page/interesting_facts_screen.dart';
+import 'package:proper_nutrition_app/ui/pages/main_pages/facts_page/facts_screen.dart';
 import 'package:proper_nutrition_app/ui/pages/main_pages/recipes_page/recipes_screen.dart';
-
-import 'dish/example_data.dart';
 import 'drawer/our_drawer.dart';
+import 'modules/feed_constructor.dart';
 
 
-  main() {
+Future main() async {
 
-  runApp( MyApp());
+
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+
+    runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
-   MyApp({Key? key}) : super(key: key);
-  JsonExample js = JsonExample();
+   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    //js.decode();
+
     return MaterialApp(
       theme: ThemeData(
         tabBarTheme: const TabBarTheme(),
@@ -32,31 +35,27 @@ class MyApp extends StatelessWidget {
 }
 
 
-List<dynamic> exampleList =const [
-   CategoryFeedBuilder(
-    categoryFeedBackgroundImg: 'assets/images/завтрак.jpg',
-    categoryTitle: 'завтрак',
-  ),
-  CategoryFeedBuilder(
-    categoryFeedBackgroundImg: 'assets/images/обед.jpg',
-    categoryTitle: 'Обед',
-  ),
-  CategoryFeedBuilder(
-    categoryFeedBackgroundImg: 'assets/images/Ужин.jpg',
-    categoryTitle: 'Ужин',
-  ),
-  CategoryFeedBuilder(
-    categoryFeedBackgroundImg: 'assets/images/Перекус вечерний.jpg',
-    categoryTitle: 'Перекус вечерний',
-  ),
-];
+class HomePage extends StatefulWidget {
 
-class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  @override
+  void initState() {
+    FeedConstructor.dietType = 0;
+    super.initState();
+  }
+
   //BreakfastHelper h = BreakfastHelper();
   final List<Tab> tabs = <Tab>[
     const Tab(child: RecipesScreen(), icon: Icon(Icons.local_dining)),
     const Tab(
-        child: CategoryScreen(),
+        child: CategoryScreen(dietType: 0),
          icon:  Icon(Icons.format_list_bulleted_outlined)),
     const Tab(
       child: DietsScreen(),
@@ -64,8 +63,6 @@ class HomePage extends StatelessWidget {
     ),
     const Tab(child: FactsScreen(), icon: Icon(Icons.import_contacts)),
   ];
-
-  HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +88,7 @@ class HomePage extends StatelessWidget {
         drawer: const OurDrawer(),
         appBar: AppBar(
           backgroundColor: const Color(0xff006f2b),
-          title: const Text('Правильное питание',
+          title: const Text('Дұрыс тамақтану',
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,

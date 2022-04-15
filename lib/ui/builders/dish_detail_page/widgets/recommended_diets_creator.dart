@@ -59,7 +59,8 @@ class _DietsCreator extends State<DietsCreator>{
               height: 30,
               width: MediaQuery.of(context).size.width * 0.2,
               margin: const EdgeInsets.symmetric(
-                  horizontal: 8),
+                  horizontal: 8,
+              vertical: 8),
               color: const Color(0xff006f2b),
               child: Center(
                 child: Text('Стол №${diets[index]}',

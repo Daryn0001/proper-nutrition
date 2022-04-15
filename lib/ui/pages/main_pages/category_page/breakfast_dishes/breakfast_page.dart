@@ -11,6 +11,7 @@ class BreakFast extends StatefulWidget {
 }
 
 class _BreakFast extends State<BreakFast> {
+  final title = 'Таңғы ас';
   final typeOfCategory = 0;
   @override
   void initState() {
@@ -21,6 +22,7 @@ class _BreakFast extends State<BreakFast> {
   Widget build(BuildContext context) {
     return  FeedConstructor(
       type: typeOfCategory,
+      title: title,
     );
   }
 }

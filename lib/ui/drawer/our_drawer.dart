@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../pages/favourites/favourites.dart';
 import '../pages/main_pages/category_page/category_page_for_drawer.dart';
+import '../pages/shopping_list/shopping_list_page.dart';
 
 
 class OurDrawer extends StatefulWidget {
@@ -23,44 +24,44 @@ class _Drawer extends State<OurDrawer> {
           children: [
             buildMenuItem(
                 icon: Icons.house,
-              text: 'Главная',
+              text: 'Басты бет',
               onClicked: () => selectedItem(context, 0)
             ),
             const SizedBox(height: 20),
             buildMenuItem(
               icon: Icons.format_list_bulleted_outlined,
-              text: 'Все рецепты',
+              text: 'Барлық рецепттер',
                 onClicked: () => selectedItem(context, 1)
             ),
             buildMenuItem(
                 icon: Icons.favorite_border,
-                text: 'Избранное',
+                text: 'Таңдаулылар',
                 onClicked: () => selectedItem(context, 2)
             ),
             buildMenuItem(
                 icon: Icons.add_shopping_cart,
-                text: 'Список покупок',
+                text: 'Сатып алу тізімі',
                 onClicked: () => selectedItem(context, 3)
             ),
             buildMenuItem(
                 icon: Icons.circle_notifications_outlined,
-                text: 'Подписаться на новеньки',
+                text: 'Жаңа өнімдерге жазылу',
                 onClicked: () => selectedItem(context, 4)
             ),
             const SizedBox(height: 20),
             buildMenuItem(
                 icon: Icons.star,
-                text: 'Оценить',
+                text: 'Бағалау',
                 onClicked: () => selectedItem(context, 4)
             ),
             buildMenuItem(
                 icon: Icons.share,
-                text: 'Расскажи другу',
+                text: 'Досыңызға айтыңыз',
                 onClicked: () => selectedItem(context, 4)
             ),
             buildMenuItem(
                 icon: Icons.copy_sharp,
-                text: 'Политика конфид-ти \n Условия использование',
+                text: 'Құпиялылық саясаты \nПайдалану шарттары',
                 onClicked: () => selectedItem(context, 4)
             ),
 
@@ -112,7 +113,9 @@ class _Drawer extends State<OurDrawer> {
       case 2: Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const  FavouritesPage())
       ); break;
-      case 3: ; break;
+      case 3: Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const  ShoppingList())
+      ); break;
       case 4: ; break;
       case 5: ; break;
       case 6: ; break;

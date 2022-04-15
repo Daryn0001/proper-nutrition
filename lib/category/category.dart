@@ -21,4 +21,6 @@ class Category {
         '\nimgUrl: $imgUrl\n}';
   }
 
+
 }
+// `--delete-conflicting-outputs

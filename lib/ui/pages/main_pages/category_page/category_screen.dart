@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:proper_nutrition_app/ui/builders/main_feed_page/feed_screen.dart';
 
 import '../../../../category/category.dart';
 import '../../../builders/inner_feed_page/feed_screen_with_search_builder.dart';
+import '../../../modules/feed_constructor.dart';
 import 'breakfast_dishes/breakfast_page.dart';
 import 'category_feed_builder.dart';
 import 'dinner/dinner_page.dart';
@@ -14,8 +16,12 @@ import 'lunch/lunch_page.dart';
 import 'morning_snack/morning_snack_page.dart';
 
 class CategoryScreen extends StatefulWidget {
+
+  final dynamic dietType;
+
   const CategoryScreen({
     Key? key,
+    this.dietType
   }) : super(key: key);
 
   @override
@@ -26,10 +32,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
   List<Category> categories = [];
   List<CategoryFeedBuilder> categoryFeeds = [];
 
+  // ! connect to firebase data base
+  initFirebase() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+  }
+
   @override
   initState() {
     super.initState();
     decode();
+    FeedConstructor.dietType = widget.dietType;
+    initFirebase();
   }
 
   Future<void> decode() async {
@@ -68,7 +82,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         case 4:
           instance = const Dinner();
           break;
-          default: instance = const FeedPageBuilderWithSearch(listOfFeeds: []);
+          default: instance = const FeedPageBuilderWithSearch(listOfFeeds: [], title: '');
       }
       categoryFeeds.add(CategoryFeedBuilder(
         categoryFeedBackgroundImg: feed.imgUrl,

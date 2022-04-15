@@ -10,6 +10,7 @@ class MorningSnack extends StatefulWidget {
 
 class _MorningSnackState extends State<MorningSnack> {
   final typeOfCategory = 1;
+  final title = 'Таңғы тіскебасар';
   @override
   void initState() {
     super.initState();
@@ -20,6 +21,7 @@ class _MorningSnackState extends State<MorningSnack> {
 
     return FeedConstructor(
       type: typeOfCategory,
+        title: title,
     );
   }
 }

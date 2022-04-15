@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'category_screen.dart';
@@ -22,7 +21,7 @@ class _CategoryPage4DrawerState extends State<CategoryPage4Drawer> {
                 fontWeight: FontWeight.w600,
                 color: Colors.white)),
       ),
-      body: const CategoryScreen(),
+      body: const CategoryScreen(dietType: 0),
     );
   }
 }

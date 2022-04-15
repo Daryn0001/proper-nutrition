@@ -10,10 +10,12 @@ class Dinner extends StatefulWidget {
 
 class _DinnerState extends State<Dinner> {
   final typeOfCategory = 4;
+  final title = 'Кешкі ас';
   @override
   Widget build(BuildContext context) {
     return FeedConstructor(
       type: typeOfCategory,
+        title: title,
     );
   }
 }

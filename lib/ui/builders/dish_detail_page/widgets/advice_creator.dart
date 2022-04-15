@@ -10,11 +10,12 @@ class Advice extends StatefulWidget{
 }
 
 class _Advice extends State<Advice>{
-  String text = 'Что то непонятное тут твориться согласись!.';
+  String text = 'Что то непонятное тут твориться согласись!';
   int textColor = 0xff999d9c;
 
   @override
   Widget build(BuildContext context) {
+    text = widget.text.isNotEmpty ? widget.text : text;
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: 20,

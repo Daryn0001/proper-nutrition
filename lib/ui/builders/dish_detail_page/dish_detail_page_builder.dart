@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:favorite_button/favorite_button.dart';
@@ -7,6 +9,7 @@ import 'widgets/ingredient_creator.dart';
 import 'widgets/recommended_diets_creator.dart';
 
 class DishDetailPageBuilder extends StatefulWidget {
+  bool isFavorite;
   final String imgPath;
   final String title;
   final double numberOfCalories;
@@ -16,8 +19,9 @@ class DishDetailPageBuilder extends StatefulWidget {
   final List<int> diets;
   final List<String> cookMethod;
 
-  const DishDetailPageBuilder(
+  DishDetailPageBuilder(
       {Key? key,
+      required this.isFavorite,
       required this.imgPath,
       required this.title,
       required this.numberOfCalories,
@@ -33,9 +37,12 @@ class DishDetailPageBuilder extends StatefulWidget {
 }
 
 class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
+  late final DocumentReference ref;
+  late bool isFavorite;
   String dishTitle = 'unknown dish title';
-  String imgPath = 'https://qazyqarta.kz/wp-content/uploads/2020/10/syrnyi-sup-s-kuricei-i-kartofelem_1590478472_10_max-1.jpg';
-  //'https://p4.wallpaperbetter.com/wallpaper/641/365/125/portrait-anime-anime-girls-digital-art-artwork-hd-wallpaper-preview.jpg';
+  String
+      imgPath = //'https://qazyqarta.kz/wp-content/uploads/2020/10/syrnyi-sup-s-kuricei-i-kartofelem_1590478472_10_max-1.jpg';
+      'https://p4.wallpaperbetter.com/wallpaper/641/365/125/portrait-anime-anime-girls-digital-art-artwork-hd-wallpaper-preview.jpg';
   String dishPower = '1 million ккал в 100 граммах';
   String briefDescription = 'unknown dish description';
   var cookingSteps = ['step 1', 'step 2', 'step 3', 'step 4', 'step 5'];
@@ -50,7 +57,35 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
     'unknown5': ' unknown г. ',
   };
 
-//https://healthyeating.printslon.com/images/zavtrak_145.png
+  // ! connect to firebase data base
+  initFirebase() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initFirebase();
+
+
+    print('from initState \n');
+     ref = FirebaseFirestore.instance
+        .collection('feed')
+        .doc(widget.title);
+
+    ref.get().then((value) => {
+      isFavorite = value['favorite'],
+      setState(() {
+        isFavorite = widget.isFavorite = value['favorite'];
+      }),
+      if(isFavorite == value['favorite']) print("equal"),
+      if(isFavorite != value['favorite']) print("not equal"),
+    });
+
+
+  }
+
 // ? Get Image
   Widget getImage() {
     imgPath = widget.imgPath != '' ? widget.imgPath : imgPath;
@@ -74,34 +109,71 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
     );
   }
 
-  // final _content = 'dishTitle';
-
   // ? Share Button
   void _shareContent() {
-    Share.share(dishTitle);
+    dishTitle = widget.title.isNotEmpty ? widget.title : dishTitle;
+    String s =
+        '💕💕Из программы Правильное Питание💕💕 \n 💩💩$dishTitle💩💩 \n'
+        'тот кто не скачает  эту прогу тот МУДАК!❤️❤️❤️';
+    Share.share(s);
   }
 
   Widget getShareButton() {
-    return ElevatedButton.icon(
+    return IconButton(
       icon: const Icon(Icons.share, color: Color(0xff353535), size: 36),
       onPressed: _shareContent,
-      label: const Text(''),
-      style: ButtonStyle(
-        padding: MaterialStateProperty.all(EdgeInsets.zero),
-        backgroundColor: MaterialStateProperty.all(const Color(0xff1e1e1e)),
-      ),
     );
   }
 
+
+
+
   // ? Favorite  Button
-  // fixme: don't work yet
   Widget getFavoriteButton() {
+  print('from method');
     return Container(
       margin: const EdgeInsets.only(
         right: 2,
       ),
       child: FavoriteButton(
-        valueChanged: () {},
+        isFavorite:  widget.isFavorite ,
+        valueChanged: (_isFavorite) async {
+          switch (_isFavorite) {
+            case true:
+              {
+                FirebaseFirestore.instance
+                    .collection('feed')
+                    .doc(widget.title)
+                    .set(
+                  {
+                    'imgPath': widget.imgPath,
+                    'title': widget.title,
+                    'numberOfCalories:': widget.numberOfCalories,
+                    'briefDescription': widget.briefDescription,
+                    'adviceText': adviceText,
+                    'ingredients': widget.ingredients,
+                    'diets': widget.diets,
+                    'cookMethod': widget.cookMethod,
+                    'favorite': true,
+                  },
+                );
+              }
+              break;
+            case false:
+              {
+                setState(() {
+                  widget.isFavorite =  _isFavorite;
+                });
+
+                FirebaseFirestore.instance
+                    .collection('feed')
+                    .doc(widget.title)
+                    .delete();
+
+              }
+              break;
+          }
+        },
         iconSize: 48,
         iconDisabledColor: const Color(0xff353535),
         iconColor: const Color(0xff499274),
@@ -176,6 +248,8 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
     return Container(
       margin: const EdgeInsets.only(
         bottom: 10,
+        right: 20,
+        left: 20,
       ),
       child: getBriefDescriptionText(),
     );
@@ -186,6 +260,7 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
     return Center(
       child: Text(
         briefDescription,
+        textAlign: TextAlign.center,
         style: const TextStyle(
           fontSize: 16,
           color: Color(0xff868686),
@@ -196,13 +271,14 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
     );
   }
 
+
+
   // ? ingredients getter
-  // width: MediaQuery.of(context).size.width,
-  // height: MediaQuery.of(context).size.height * 0.55,
   Widget getIngredients(ingredients) {
     return Container(
       color: const Color(0xff1d2822),
       child: IngredientCreator(
+        foodName: widget.title,
         ingredients: ingredients,
       ),
     );
@@ -235,6 +311,7 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
     adviceText = widget.adviceText.isNotEmpty ? widget.adviceText : adviceText;
     return Scaffold(
         appBar: AppBar(
+          title: const Text('Рецепт'),
           backgroundColor: const Color(0xff006f2b),
         ),
         body: SingleChildScrollView(

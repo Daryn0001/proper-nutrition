@@ -15,7 +15,8 @@ class FeedBuilder extends StatefulWidget {
 }
 
 class _BreakFastBuilder extends State<FeedBuilder>{
-  dynamic obj = const DishDetailPageBuilder(
+  dynamic obj = DishDetailPageBuilder(
+      isFavorite: false,
       diets: [],
       numberOfCalories: 0,
       ingredients: {'': ''},
@@ -31,9 +32,10 @@ class _BreakFastBuilder extends State<FeedBuilder>{
         fit: BoxFit.cover, width: double.infinity);
 
     if (widget.backgroundImg != null) {
-
-      img = Image.network(widget.backgroundImg,  fit: BoxFit.cover, width: double.infinity,
-          );
+      img = Image.network(
+        widget.backgroundImg,
+        fit: BoxFit.cover,
+        width: double.infinity,);
     }
     return img;
   }
@@ -50,14 +52,17 @@ class _BreakFastBuilder extends State<FeedBuilder>{
             width: 1,
             style: BorderStyle.solid,
           )),
-      child: Center(
-        child: FittedBox(
-          fit: BoxFit.fitWidth,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 15,
+          vertical:10,
+        ),
+        child: Center(
           child: Text(
             widget.text,
             textAlign: TextAlign.center,
             style: const TextStyle(
-              fontSize: 24,
+              fontSize: 18,
               color: Color(0xffffffff),
               fontWeight: FontWeight.w600,
             ),
@@ -75,9 +80,6 @@ class _BreakFastBuilder extends State<FeedBuilder>{
       child: Container(
         height: height,
         width: double.infinity,
-        margin: const EdgeInsets.only(
-          top: 2.0,
-        ),
         child: Stack(children: [
           getImage(),
           Center(child: getText()),

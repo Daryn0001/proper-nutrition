@@ -2,6 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../favourites/favourites.dart';
+import '../../shopping_list/shopping_list_page.dart';
+import '../category_page/category_page_for_drawer.dart';
+
 class RecipesScreen extends StatefulWidget {
   const RecipesScreen({Key? key}) : super(key: key);
 
@@ -12,33 +16,33 @@ class RecipesScreen extends StatefulWidget {
 class _RecipesScreenState extends State<RecipesScreen> {
   int activeIndex4TopSlider = 0, activeIndex4NewsSlider = 0;
   final imageUrls4TopSlider = [
-    'https://healthyeating.printslon.com/images/R1.png',
-    'https://healthyeating.printslon.com/images/R18.png',
-    'https://healthyeating.printslon.com/images/zavtrak_201.png',
+    'https://wallpaperaccess.com/full/1278234.jpg',
+    'https://wallpapercave.com/wp/wp3138446.jpg',
+
     'https://healthyeating.printslon.com/images/R50.png',
-    'https://healthyeating.printslon.com/images/R53.png',
+    'https://img4.goodfon.com/wallpaper/nbig/c/e1/klubnika-smorodina-frukty-malina-iagody-salat-dessert-fruit.jpg',
   ];
 
   final imgUrls4NewsSlider = [
-    'https://healthyeating.printslon.com/images/r_obed_301.png',
     'https://healthyeating.printslon.com/images/R68.png',
     'https://healthyeating.printslon.com/images/obed_255.png',
     'https://healthyeating.printslon.com/images/r_recept_29_ng.png',
     'https://healthyeating.printslon.com/images/r_recept_7_ng.png',
+    'https://hips.hearstapps.com/delish/assets/17/26/1498854508-delish-mimosa-fruit-salad-3.jpg',
   ];
 
   String testUrl1 = 'https://img5.goodfon.ru/wallpaper/nbig/9/21/girl-anime-wallpapers-anime-girl.jpg';
-  String testUrl2 = 'https://coolthemestores.com/wp-content/uploads/2021/02/anime-girl-featured.jpg';
-  String testUrl3 = 'https://wallpaper.dog/large/20407221.jpg';
+  String testUrl2 = 'https://www.pixel4k.com/wp-content/uploads/2018/03/Strawberry%20Water%20Splash5154818736.jpg';
+  String testUrl3 = 'https://wallpaperaccess.com/full/2329942.jpg';
 
 
   @override
   Widget build(BuildContext context) {
     final gridWidgets = <Widget>[
-      slideBuilder(imgUrls4NewsSlider, 'Новинки'),
-    buildImage(testUrl1, 0, 'Рецепт Дня', 130.0, 50.0, 16.0),
-    buildImage(testUrl2, 0, 'Конструктор', 130.0, 50.0, 16.0),
-    buildImage(testUrl3, 0, 'Избранное', 130.0, 50.0, 16.0),
+      slideBuilder(imgUrls4NewsSlider, 'Жаңа'),
+    buildImage(testUrl1, 0, 'Күннің рецебі', 130.0, 50.0, 16.0),
+    buildImage(testUrl2, 0, 'Сатып алу тізімі', 130.0, 50.0, 16.0, routePage: const ShoppingList()),
+    buildImage(testUrl3, 0, 'Таңдаулылар', 130.0, 50.0, 16.0, routePage: const FavouritesPage()),
 
     ];
     return SingleChildScrollView(
@@ -69,9 +73,15 @@ class _RecipesScreenState extends State<RecipesScreen> {
                             itemCount: imageUrls4TopSlider.length,
                             itemBuilder: (context, index, realIndex) {
                               final imgUrl = imageUrls4TopSlider[index];
-                              return buildImage(imgUrl, index, 'Смотреть все рецепты',
-                                  (MediaQuery.of(context).size.width * 0.7),
-                                  (MediaQuery.of(context).size.width * 0.2), 20.0);
+                              return GestureDetector(
+                                onTap: () {Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const CategoryPage4Drawer()));},
+                                child: buildImage(imgUrl, index, 'Барлық рецепттерді қарау',
+                                    (MediaQuery.of(context).size.width * 0.7),
+                                    (MediaQuery.of(context).size.width * 0.2), 20.0),
+                              );
                             }),
                         Align(
                             alignment: Alignment.bottomCenter,
@@ -105,23 +115,31 @@ class _RecipesScreenState extends State<RecipesScreen> {
     );
   }
 
-  Widget buildImage(imgUrl, index, title, w, h, fz) => Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 1,
-      ),
-      color: Colors.grey,
-      child: Stack(
-        children: [
-          Image.network(
-          imgUrl,
-            width:double.infinity,
-            height: MediaQuery.of(context).size.height,
-            fit: BoxFit.cover,
+  Widget buildImage(imgUrl, index, title, w, h, fz, {routePage}) {
+    routePage ??= const CategoryPage4Drawer();
+    return GestureDetector(
+    onTap: () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => routePage));
+    },
+    child: Container(
+        margin: const EdgeInsets.symmetric(
+          horizontal: 1,
         ),
-          getTitle(title,w, h, fz),
+        color: Colors.grey,
+        child: Stack(
+          children: [
+            Image.network(
+            imgUrl,
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height,
+              fit: BoxFit.cover,
+          ),
+            getTitle(title,w, h, fz),
 
-    ],
-      ));
+      ],
+        )),
+  );
+  }
 
   Widget buildIndicator(activeIndex, {count = 5}) => AnimatedSmoothIndicator(
         activeIndex: activeIndex,
@@ -141,7 +159,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
     CarouselSlider.builder(
         options: CarouselOptions(
           height: MediaQuery.of(context).size.height,
-          autoPlay: false,
+          autoPlay: true,
           autoPlayInterval: const Duration(seconds: 3),
           viewportFraction: 1,
           onPageChanged: (index, reason) =>

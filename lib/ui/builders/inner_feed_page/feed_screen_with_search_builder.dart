@@ -6,8 +6,9 @@ import 'search_widget.dart';
 class FeedPageBuilderWithSearch extends StatefulWidget {
   //final List<FeedBuilder> listOfFeeds;
   final List<dynamic> listOfFeeds;
+  final String title;
 
-  const FeedPageBuilderWithSearch({Key? key, required this.listOfFeeds}) : super(key: key);
+  const FeedPageBuilderWithSearch({Key? key, required this.title, required this.listOfFeeds}) : super(key: key);
 
 
   @override
@@ -56,7 +57,7 @@ class _FeedPageBuilderWithSearchState extends State<FeedPageBuilderWithSearch> {
 
   Widget buildSearch() => SearchWidget(
         text: '',
-        hintText: 'Поиск',
+        hintText: 'Іздеу',
         onChanged: searchObject,
       );
 
@@ -78,6 +79,7 @@ class _FeedPageBuilderWithSearchState extends State<FeedPageBuilderWithSearch> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(widget.title),
         backgroundColor: const Color(0xff006f2b),
       ),
       body: Container(
