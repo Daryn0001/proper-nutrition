@@ -22,7 +22,8 @@ class _FactsFeedState extends State<FactsFeed> {
       'https://images4.alphacoders.com/225/thumb-1920-225566.jpg';
 
   String title = 'Курение вредит здаровью';
-  final titleBackground = const Color(0xff245446);
+  final appBarBackColor = const Color(0xff35858B);
+  final titleBackground = const Color(0xff35858B);
 
   FactsDetailPage fact = const  FactsDetailPage(
     imgUrl:  'https://images4.alphacoders.com/225/thumb-1920-225566.jpg',
@@ -67,11 +68,11 @@ class _FactsFeedState extends State<FactsFeed> {
   Container getText() {
     return Container(
       width: MediaQuery.of(context).size.width * 0.65,
-      height: MediaQuery.of(context).size.width * 0.16,
+      height: MediaQuery.of(context).size.width * 0.15,
       decoration: BoxDecoration(
           color: titleBackground,
           border: Border.all(
-            color: const Color(0xff000000),
+            color: const Color(0xffffffff),
             width: 1,
             style: BorderStyle.solid,
           )),
@@ -83,6 +84,7 @@ class _FactsFeedState extends State<FactsFeed> {
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 18,
+
               color: Color(0xffffffff),
               fontWeight: FontWeight.w600,
             ),

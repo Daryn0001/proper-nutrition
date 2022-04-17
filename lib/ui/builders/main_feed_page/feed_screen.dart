@@ -15,7 +15,8 @@ class FeedPageBuilder extends StatefulWidget {
 class _FeedPageBuilderState extends State<FeedPageBuilder> {
   static String obet = 'https://wallpaperaccess.com/full/3759075.jpg';
 
-
+  var appBarBackColor = const Color(0xff35858B);
+  var tabBarColor = const Color(0xff4FBDBA);
 
   List<dynamic> exampleList = [
      FeedBuilder(

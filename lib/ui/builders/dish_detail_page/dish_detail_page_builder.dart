@@ -49,6 +49,11 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
   var diets = [0, 0, 0, 0, 0];
   String adviceText = 'something about interesting';
 
+
+  var appBarBackColor = const Color(0xff35858B);
+  var tabBarColor = const Color(0xff4FBDBA);
+  var backgroundColor = Colors.white70;
+
   Map<String, String> ingredients = {
     'unknown1': ' unknown г.',
     'unknown2': ' unknown г.',
@@ -98,14 +103,14 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
       ),
     );
   }
-
+final titleColor = Colors.black54;
   // ? Get Title
   Widget getTitle() {
     return Text(
       dishTitle,
       textAlign: TextAlign.center,
       style: const TextStyle(
-          fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff499274)),
+          fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black54),
     );
   }
 
@@ -113,14 +118,14 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
   void _shareContent() {
     dishTitle = widget.title.isNotEmpty ? widget.title : dishTitle;
     String s =
-        '💕💕Из программы Правильное Питание💕💕 \n 💩💩$dishTitle💩💩 \n'
-        'тот кто не скачает  эту прогу тот МУДАК!❤️❤️❤️';
+        '✌️Из программы Правильное Питание️✌️ \n 😋$dishTitle \n'
+        'тот кто скачает  эту прогу тот Красавчик!❤️️';
     Share.share(s);
   }
 
   Widget getShareButton() {
     return IconButton(
-      icon: const Icon(Icons.share, color: Color(0xff353535), size: 36),
+      icon: const Icon(Icons.share, color: Colors.grey, size: 36),
       onPressed: _shareContent,
     );
   }
@@ -136,6 +141,7 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
         right: 2,
       ),
       child: FavoriteButton(
+
         isFavorite:  widget.isFavorite ,
         valueChanged: (_isFavorite) async {
           switch (_isFavorite) {
@@ -175,8 +181,8 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
           }
         },
         iconSize: 48,
-        iconDisabledColor: const Color(0xff353535),
-        iconColor: const Color(0xff499274),
+        iconDisabledColor: Colors.grey,
+        iconColor: appBarBackColor,
       ),
     );
   }
@@ -223,7 +229,7 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
           vertical: 10,
           horizontal: 5,
         ),
-        color: const Color(0xff046f2a),
+        color: appBarBackColor,
         child: getText(),
       ),
     );
@@ -276,7 +282,8 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
   // ? ingredients getter
   Widget getIngredients(ingredients) {
     return Container(
-      color: const Color(0xff1d2822),
+      // const Color(0xff1d2822)
+      color: tabBarColor,
       child: IngredientCreator(
         foodName: widget.title,
         ingredients: ingredients,
@@ -312,11 +319,11 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Рецепт'),
-          backgroundColor: const Color(0xff006f2b),
+          backgroundColor: appBarBackColor,
         ),
         body: SingleChildScrollView(
           child: Container(
-            color: const Color(0xff1e1e1e),
+            color: backgroundColor,
             child: Column(children: [
               getImage(),
               getTitleAndShareBtn(),
@@ -331,3 +338,5 @@ class _DishDetailPageBuilder extends State<DishDetailPageBuilder> {
         ));
   }
 }
+
+

@@ -27,10 +27,10 @@ class _SearchWidgetState extends State<SearchWidget> {
 
     return Container(
       height: 42,
-      margin: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+      margin: const EdgeInsets.fromLTRB(15, 10, 15, 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: const Color(0xff1e1e1e),
+        color: const Color(0xffffffff),
         border: Border.all(color: Colors.black26),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -39,7 +39,7 @@ class _SearchWidgetState extends State<SearchWidget> {
         decoration: InputDecoration(
 
           filled: true,
-          fillColor: const Color(0xff1e1e1e),
+          fillColor: const Color(0xffffffff),
           icon: Icon(Icons.search, color: style.color, size: 26),
           suffixIcon: widget.text.isNotEmpty
               ? GestureDetector(

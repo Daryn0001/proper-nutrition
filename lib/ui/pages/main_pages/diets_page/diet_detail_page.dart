@@ -24,10 +24,10 @@ class DietDetailPage extends StatefulWidget {
 }
 
 class _DietDetailPageState extends State<DietDetailPage> {
-  final appBarBackground = const Color(0xff016725);
-  final shortTextColor = Colors.white70;
-
-
+  final appBarBackColor = const Color(0xff35858B);
+  final shortTextColor = Colors.black54;
+  final backgroundColor = Colors.white70;
+  final textColor = Colors.black38;
   @override
   initState(){
     super.initState();
@@ -38,12 +38,13 @@ class _DietDetailPageState extends State<DietDetailPage> {
   String moreDescription = 'more Description';
   String excluded = 'excluded';
   String title = "Стол №1";
-  String url =
-      'https://images.wallpapersden.com/image/download/cosmos-galaxy-art_a2xsZmuUmZqaraWkpJRmZ21lrWxnZQ.jpg';
+  String url = 'https://st2.depositphotos.com/2933339/i/600/depositphotos_429876318-stock-photo-fresh-tomato-parsley-rosemary-isolated.jpg';
+
+  // 'https://images.wallpapersden.com/image/download/cosmos-galaxy-art_a2xsZmuUmZqaraWkpJRmZ21lrWxnZQ.jpg';
 
   @override
   Widget build(BuildContext context) {
-    title = widget.id != 0 ? 'Стол №${widget.id}' : title;
+    title = widget.id != 0 ? 'Кесте №${widget.id}' : title;
     moreDescription = widget.moreDescription.isNotEmpty
         ? widget.moreDescription
         : moreDescription;
@@ -52,13 +53,13 @@ class _DietDetailPageState extends State<DietDetailPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        backgroundColor: appBarBackground,
+        backgroundColor: appBarBackColor,
       ),
       body: SingleChildScrollView(
         child: Container(
 
           //height: MediaQuery.of(context).size.height,
-          color: const Color(0xff1e1e1e),
+          color: backgroundColor,
           child: Column(
             children: [
               getTitle(),
@@ -86,7 +87,7 @@ class _DietDetailPageState extends State<DietDetailPage> {
   }
 
   Widget getTitle() {
-    title = widget.id != 0 ? 'Стол ${widget.id}' : title;
+    title = widget.id != 0 ? 'Кесте ${widget.id}' : title;
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.18,
       child: Stack(children: [
@@ -139,7 +140,7 @@ class MoreDescriptionGetter extends StatefulWidget {
 }
 
 class _MoreDescriptionGetterState extends State<MoreDescriptionGetter> {
-  final bigTextColor = Colors.white38;
+  final bigTextColor = Colors.black38;
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +169,7 @@ class ExcludedGetter extends StatefulWidget {
 }
 
 class _ExcludedGetterState extends State<ExcludedGetter> {
-  final excludedTextColor = Colors.white38;
+  final excludedTextColor = Colors.black38;
 
   Widget getText(text){
 // ! handle the  ' - ' strings

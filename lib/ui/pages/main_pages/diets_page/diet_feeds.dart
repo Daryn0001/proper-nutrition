@@ -21,13 +21,15 @@ class DietFeed extends StatefulWidget {
 }
 
 class _DietFeedState extends State<DietFeed> {
-  String url = 'https://images.wallpapersden.com/image/download/cosmos-galaxy-art_a2xsZmuUmZqaraWkpJRmZ21lrWxnZQ.jpg';
+  String url = 'https://st2.depositphotos.com/2933339/i/600/depositphotos_429876318-stock-photo-fresh-tomato-parsley-rosemary-isolated.jpg';
+  //'https://images.wallpapersden.com/image/download/cosmos-galaxy-art_a2xsZmuUmZqaraWkpJRmZ21lrWxnZQ.jpg';
 
   //'https://cache.desktopnexus.com/thumbseg/2250/2250913-bigthumbnail.jpg';
   String title = 'Стол №1',
       description = 'Гастрит';
-  final titleBackground = const Color(0xff245446);
-  final descriptionColor = const Color(0xff378d68);
+  var appBarBackColor = const Color(0xff35858B);
+  final titleBackground = const Color(0xff35858B);
+  final descriptionColor = const Color(0xff4FBDBA );
 
   dynamic routPage = const DietDetailPage(
     id: 0,
@@ -41,7 +43,7 @@ class _DietFeedState extends State<DietFeed> {
   @override
   Widget build(BuildContext context) {
     routPage = widget.routePage ?? routPage;
-    double height = MediaQuery.of(context).size.height * 0.29;
+    double height = MediaQuery.of(context).size.height * 0.265;
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -50,17 +52,14 @@ class _DietFeedState extends State<DietFeed> {
                 builder: (context) => routPage));
       },
       child: Container(
-        color: Colors.white30,
         height: height,
-        margin: const EdgeInsets.only(
-          top: 2.0,
-        ),
         child: Stack(
           children: [
             Image.network(
               url,
               fit: BoxFit.cover,
               width: double.infinity,
+              height: MediaQuery.of(context).size.height,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -74,7 +73,7 @@ class _DietFeedState extends State<DietFeed> {
 
   Container getText() {
     if(widget.id != 0){
-      title = 'Стол №${widget.id}';
+      title = 'Кесте №${widget.id}';
     }
     return Container(
       width: MediaQuery.of(context).size.width * 0.65,
@@ -83,7 +82,7 @@ class _DietFeedState extends State<DietFeed> {
       decoration: BoxDecoration(
           color: titleBackground,
           border: Border.all(
-            color: const Color(0xff000000),
+            color: const Color(0xffffffff),
             width: 1,
             style: BorderStyle.solid,
           )),

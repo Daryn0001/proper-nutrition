@@ -4,18 +4,14 @@ import 'package:proper_nutrition_app/ui/pages/main_pages/category_page/category_
 import 'package:proper_nutrition_app/ui/pages/main_pages/diets_page/diets_screen.dart';
 import 'package:proper_nutrition_app/ui/pages/main_pages/facts_page/facts_screen.dart';
 import 'package:proper_nutrition_app/ui/pages/main_pages/recipes_page/recipes_screen.dart';
-import 'drawer/our_drawer.dart';
-import 'modules/feed_constructor.dart';
+import 'ui/drawer/our_drawer.dart';
+import 'ui/modules/feed_constructor.dart';
 
 
 Future main() async {
-
-
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
-
     runApp(const MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -51,7 +47,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  //BreakfastHelper h = BreakfastHelper();
+
   final List<Tab> tabs = <Tab>[
     const Tab(child: RecipesScreen(), icon: Icon(Icons.local_dining)),
     const Tab(
@@ -80,14 +76,15 @@ class _HomePageState extends State<HomePage> {
         );
       }).toList(),
     );
-
+var appBarBackColor = const Color(0xff35858B);
+var tabBarColor = const Color(0xff4FBDBA);
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        // TODO: for Marlen with love
+
         drawer: const OurDrawer(),
         appBar: AppBar(
-          backgroundColor: const Color(0xff006f2b),
+         backgroundColor: appBarBackColor,
           title: const Text('Дұрыс тамақтану',
               style: TextStyle(
                   fontSize: 20,
@@ -96,7 +93,7 @@ class _HomePageState extends State<HomePage> {
           bottom: PreferredSize(
             preferredSize: _tabBar.preferredSize,
             child: ColoredBox(
-              color: const Color(0xff016725),
+              color: tabBarColor,
               child: _tabBar,
             ),
           ),

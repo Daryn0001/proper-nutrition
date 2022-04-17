@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import '../pages/favourites/favourites.dart';
 import '../pages/main_pages/category_page/category_page_for_drawer.dart';
 import '../pages/shopping_list/shopping_list_page.dart';
@@ -15,7 +16,7 @@ class _Drawer extends State<OurDrawer> {
   @override
   Widget build(BuildContext context) {
 
-    const backgroundColor = 0xff1c201f;
+    const backgroundColor = 0xffAEFEFF;
 
     return  Drawer(
       child: Material(
@@ -40,30 +41,30 @@ class _Drawer extends State<OurDrawer> {
             ),
             buildMenuItem(
                 icon: Icons.add_shopping_cart,
-                text: 'Сатып алу тізімі',
+                  text: 'Сатып алу тізімі',
                 onClicked: () => selectedItem(context, 3)
             ),
-            buildMenuItem(
+           /* buildMenuItem(
                 icon: Icons.circle_notifications_outlined,
                 text: 'Жаңа өнімдерге жазылу',
                 onClicked: () => selectedItem(context, 4)
-            ),
+            ),*/
             const SizedBox(height: 20),
-            buildMenuItem(
+           /* buildMenuItem(
                 icon: Icons.star,
                 text: 'Бағалау',
                 onClicked: () => selectedItem(context, 4)
-            ),
+            ),*/
             buildMenuItem(
                 icon: Icons.share,
                 text: 'Досыңызға айтыңыз',
                 onClicked: () => selectedItem(context, 4)
             ),
-            buildMenuItem(
+           /* buildMenuItem(
                 icon: Icons.copy_sharp,
                 text: 'Құпиялылық саясаты \nПайдалану шарттары',
                 onClicked: () => selectedItem(context, 4)
-            ),
+            ),*/
 
           ],
         ),
@@ -71,16 +72,13 @@ class _Drawer extends State<OurDrawer> {
     );
   }
 
-  Widget buildMenuItem({
-    required String text,
-    required IconData icon,
-    VoidCallback? onClicked,
-  }){
-    const color = Color(0xff1d2822);
+  Widget buildMenuItem({required String text, required IconData icon, VoidCallback? onClicked,   }){
+    const color = Color(0xff4FBDBA);
     const hoverColor = Colors.white70;
-    const iconColor = Color(0xff333834);
-    const textColor = Color(0xffd4ddd8);
-    const borderColor = Color(0xff1d3128);
+    //0xff333834
+    const iconColor = Color(0xffffffff);
+    const textColor = Color(0xffffffff);
+    const borderColor = Color(0xff4FBDBA);
 
     return Container(
       decoration:  BoxDecoration(
@@ -94,13 +92,15 @@ class _Drawer extends State<OurDrawer> {
       child: ListTile(
         hoverColor: hoverColor,
         textColor: textColor,
-        leading: Text(text),
+        leading: Text(text,
+        style: const TextStyle(
+          fontSize: 16,
+        )),
         trailing: Icon(icon, color: iconColor),
         onTap: onClicked,
       ),
     );
   }
-
 
   void selectedItem(BuildContext context, index){
     Navigator.of(context).pop();
@@ -116,13 +116,17 @@ class _Drawer extends State<OurDrawer> {
       case 3: Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const  ShoppingList())
       ); break;
-      case 4: ; break;
-      case 5: ; break;
-      case 6: ; break;
-      case 7: ; break;
-      case 8: ; break;
-      case 9: ; break;
-      case 10: ; break;
+      case 4: getShareButton(); break;
     }
   }
+
+  // ? Share Button
+  Future<void> getShareButton() async{
+    String s =
+        '✌️Дұрыс тамақтану программасы✌️\n'
+        '     （づ￣3￣）づ╭❤️～'
+        '\nБұл бағдарламаны жүктемейтін адам -Ешак!️️️';
+    Share.share(s);
+  }
+
 }

@@ -19,7 +19,7 @@ class IngredientCreator extends StatefulWidget {
 class _IngredientCreator extends State<IngredientCreator> {
 
 
-  String title = 'Ингредиенты';
+  String title = 'Ингредиенттер';
   Map<String, String> ingredients = {
     'Яйцо': ' 2 шт.',
     'Помидор': ' 30 г.',
@@ -88,7 +88,8 @@ class _IngredientCreator extends State<IngredientCreator> {
         vertical: 20,
         horizontal: 15,
       ),
-      color: const Color(0xff1d2822),
+      // const Color(0xff1d2822)
+      //color: Colors.black26,
       child: Flex(
         direction: Axis.vertical,
         children: [
@@ -133,9 +134,9 @@ class IngredientGetter extends StatefulWidget {
 
 class _IngredientGetter extends State<IngredientGetter>{
   late final DocumentReference ref;
-  int defaultBtnColor = 0xff343633;
-  int addButtonColor = 0xff343633;
-  int minusButtonColor = 0xff499274;
+  int defaultBtnColor = 0xffffffff;
+  int addButtonColor = 0xffffffff;
+  int minusButtonColor = 0xffffffff;
 
   initFirebase() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -167,7 +168,7 @@ class _IngredientGetter extends State<IngredientGetter>{
             const WidgetSpan(
               child:  Icon(
                   Icons.check,
-                  color: Color(0xff303430),
+                  color: Color(0xffffffff),
                   size: 28
               ),
             ),
@@ -180,7 +181,7 @@ class _IngredientGetter extends State<IngredientGetter>{
                     style: const TextStyle(
                       decoration: TextDecoration.underline,
                       fontSize: 16,
-                      color: Color(0xffe7cbed),
+                      color: Color(0xffffffff),
                       fontWeight: FontWeight.w500,
                       wordSpacing: 5,
                     ),
@@ -193,7 +194,7 @@ class _IngredientGetter extends State<IngredientGetter>{
                   widget.quantity,
                   style: const TextStyle(
                     fontSize: 16,
-                    color: Color(0xff7e8782),
+                    color: Colors.white54,
                     fontStyle: FontStyle.italic,
                   ),
                 ),

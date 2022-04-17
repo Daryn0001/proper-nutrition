@@ -14,7 +14,7 @@ class FavouritesPage extends StatefulWidget {
 }
 
 class _FavouritesPageState extends State<FavouritesPage> {
-
+  var appBarBackColor = const Color(0xff35858B);
   initFirebase() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
@@ -40,7 +40,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xff006f2b),
+        backgroundColor: appBarBackColor,
         title: const Text('Таңдаулылар',
             style: TextStyle(
                 fontSize: 20,
@@ -48,7 +48,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
                 color: Colors.white)),
       ),
       body: Container(
-        color: const Color(0xff1e1e1e),
+        color: Colors.white70,
         child: Flex(
           direction: Axis.vertical,
           children: [

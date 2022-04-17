@@ -20,7 +20,8 @@ class _FeedPageBuilderWithSearchState extends State<FeedPageBuilderWithSearch> {
 
   String query = '';
   late List<dynamic> feeds;
-
+  var appBarBackColor = const Color(0xff35858B);
+  var tabBarColor = const Color(0xff4FBDBA);
 
 
   List<dynamic> exampleList = [
@@ -80,10 +81,10 @@ class _FeedPageBuilderWithSearchState extends State<FeedPageBuilderWithSearch> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: const Color(0xff006f2b),
+        backgroundColor: appBarBackColor,
       ),
       body: Container(
-        color: const Color(0xff1e1e1e),
+        color: Colors.white70,
         child: Flex(direction: Axis.vertical, children: [
           buildSearch(),
           Expanded(

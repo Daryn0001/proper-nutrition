@@ -18,7 +18,7 @@ class FactsDetailPage extends StatefulWidget {
 
 class _FactsDetailPage extends State<FactsDetailPage> {
   String title = 'Title', imgUrl = '', description = '';
-
+  final appBarBackColor = const Color(0xff35858B);
   @override
   Widget build(BuildContext context) {
     title = widget.title.isNotEmpty ? widget.title : title;
@@ -27,7 +27,7 @@ class _FactsDetailPage extends State<FactsDetailPage> {
         widget.description.isNotEmpty ? widget.description : description;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xff006f2b),
+        backgroundColor: appBarBackColor,
         title: Text(title,
             style: const TextStyle(
                 fontSize: 20,
@@ -43,7 +43,7 @@ class _FactsDetailPage extends State<FactsDetailPage> {
                 padding: const EdgeInsets.symmetric(
                     vertical: 15,
                     horizontal: 15),
-              color: const Color(0xff1e1e1e),
+              color: Colors.white70,
               child: Column(
                 children: [
                   getTitle(),
@@ -80,7 +80,7 @@ class _FactsDetailPage extends State<FactsDetailPage> {
         child: Text(
           title,
           style: const TextStyle(
-            color: Colors.white,
+            color: Colors.black38,
             fontSize: 20,
             fontWeight: FontWeight.w700,
           ),
@@ -109,7 +109,7 @@ class _TextGetterState extends State<TextGetter> {
       child: Text(
         widget.text,
         style: const TextStyle(
-          color: Colors.white,
+          color: Colors.black38,
           fontSize: 16,
           fontFamily: "Times New Roman",
         ),

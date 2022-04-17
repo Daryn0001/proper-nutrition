@@ -27,7 +27,7 @@ class _BreakFastBuilder extends State<FeedBuilder>{
       adviceText: '');
 
 
-  Widget getImage() {
+  Widget getImage(context) {
     var img = Image.network('https://wallpaperaccess.com/full/3759075.jpg',
         fit: BoxFit.cover, width: double.infinity);
 
@@ -35,20 +35,24 @@ class _BreakFastBuilder extends State<FeedBuilder>{
       img = Image.network(
         widget.backgroundImg,
         fit: BoxFit.cover,
+        height: MediaQuery.of(context).size.height,
         width: double.infinity,);
     }
     return img;
   }
-
+  //const Color(0xff358c6a)\
+  //0xff35858B  0xff54BAB9   35858B
+  //B2F9FC  /4FBDBA
+var backColor4Title = const Color(0xff35858B);
   Container getText() {
     return Container(
       width: MediaQuery.of(context).size.width * 0.65,
       height: MediaQuery.of(context).size.width * 0.16,
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: const Color(0xff358c6a),
+          color: backColor4Title,
           border: Border.all(
-            color: const Color(0xff000000),
+            color: const Color(0xffffffff),
             width: 1,
             style: BorderStyle.solid,
           )),
@@ -81,7 +85,7 @@ class _BreakFastBuilder extends State<FeedBuilder>{
         height: height,
         width: double.infinity,
         child: Stack(children: [
-          getImage(),
+          getImage(context),
           Center(child: getText()),
         ]),
       ),

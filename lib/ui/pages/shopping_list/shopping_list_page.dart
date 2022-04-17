@@ -10,15 +10,15 @@ class ShoppingList extends StatefulWidget {
 }
 
 class _ShoppingListState extends State<ShoppingList> {
-  bool _switchValue = false;
-  final  _backgroundColor = const Color(0xff1e1e1e);
+  var appBarBackColor = const Color(0xff35858B);
+  final  _backgroundColor = Colors.white70;
   final _textColor = const Color(0xff969696);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xff006f2b),
+        backgroundColor: appBarBackColor,
         title: const Text('Сатып алу тізімі',
             style: TextStyle(
                 fontSize: 20,
@@ -38,6 +38,7 @@ class _ShoppingListState extends State<ShoppingList> {
   }
 
 
+
   Widget getList() {
     return Expanded(
       child: StreamBuilder(
@@ -47,8 +48,9 @@ class _ShoppingListState extends State<ShoppingList> {
           builder: (BuildContext context,
               AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
-              print('db is empty');
-              return Text('emptry');
+              return  const Center(
+                child: CircularProgressIndicator(),
+              );
             }
             if (snapshot.hasError) {
               return const Center(child: Text('Something went wrong'));

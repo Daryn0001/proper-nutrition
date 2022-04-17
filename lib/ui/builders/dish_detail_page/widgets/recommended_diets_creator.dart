@@ -13,8 +13,8 @@ class DietsCreator extends StatefulWidget {
 
 class _DietsCreator extends State<DietsCreator>{
 
-
-  String dietsTitle = 'Это блюдо рекомендовано при следующих диетах ';
+  var appBarBackColor = const Color(0xff35858B);
+  String dietsTitle = 'Бұл тағам келесі диеталар үшін ұсынылады';
 
 
   // ? diet getter
@@ -52,7 +52,7 @@ class _DietsCreator extends State<DietsCreator>{
 
 
   List<Set<GestureDetector>> createDietButtons(diets){
-
+    var appBarBackColor = const Color(0xff35858B);
     var list = List.generate(diets.length, (index) => {
       GestureDetector(
           child: Container(
@@ -61,7 +61,7 @@ class _DietsCreator extends State<DietsCreator>{
               margin: const EdgeInsets.symmetric(
                   horizontal: 8,
               vertical: 8),
-              color: const Color(0xff006f2b),
+              color: appBarBackColor,
               child: Center(
                 child: Text('Стол №${diets[index]}',
                   style: const TextStyle(
@@ -88,7 +88,7 @@ class _DietsCreator extends State<DietsCreator>{
           dietsTitle,
           textAlign: TextAlign.center,
           style: const TextStyle(
-              color: Colors.white,
+              color: Colors.black26,
               fontSize: 17,
               fontWeight: FontWeight.w500
 

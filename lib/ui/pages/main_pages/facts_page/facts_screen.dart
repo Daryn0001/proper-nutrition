@@ -17,14 +17,7 @@ class FactsScreen extends StatefulWidget{
 
 class _FactsScreenState extends State<FactsScreen> {
   List<dynamic> feeds = [];
-  /*List<dynamic> exampleList = [
-    const FactsFeed(),
-    const FactsFeed(),
-    const FactsFeed(),
-    const FactsFeed(),
-    const FactsFeed(),
-    const FactsFeed(),
-  ];*/
+
 
 
   @override
@@ -91,7 +84,7 @@ class _FactsScreenState extends State<FactsScreen> {
     }
 
     return Container(
-      color: const Color(0xff000000),
+      color: const Color(0xffffffff),
       child: Flex(
         direction: Axis.vertical,
         children: [

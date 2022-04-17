@@ -24,13 +24,6 @@ class _DietsScreenState extends State<DietsScreen> {
     decode();
   }
 
-/*  List<dynamic> exampleList = [
-    const DietFeed(),
-    const DietFeed(),
-    const DietFeed(),
-    const DietFeed(),
-    const DietFeed(),
-  ];*/
 
   Future<void> decode() async {
     final String response = await rootBundle.loadString('assets/json/dieta.json');
@@ -88,7 +81,7 @@ class _DietsScreenState extends State<DietsScreen> {
       );
     }
     return Container(
-      color: const Color(0xff000000),
+      color: const Color(0xffffffff),
       child: Flex(
         direction: Axis.vertical,
         children: [

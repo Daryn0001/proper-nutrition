@@ -10,12 +10,13 @@ class CategoryPage4Drawer extends StatefulWidget {
 }
 
 class _CategoryPage4DrawerState extends State<CategoryPage4Drawer> {
+  var appBarBackColor = const Color(0xff35858B);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xff006f2b),
-        title: const Text('Выберите свое блюдо',
+        backgroundColor: appBarBackColor,
+        title: const Text('Тағамыңызды таңдаңыз',
             style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
